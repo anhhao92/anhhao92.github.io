@@ -1,0 +1,50 @@
+.input--custom {
+    border: none;
+
+    &:-webkit-input-placeholder {
+        font-size: 18px;
+        font-weight: 500;
+    }
+}
+
+.task--completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.btn-secondary {
+    color: #000;
+    background-color: #fff;
+}
+
+.todo__filter {
+    min-width: 180px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.todo__remain {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.todo__input {
+    padding-bottom: 10px;
+}
+
+.todo__header{
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.task__toggle {
+    cursor: pointer;
+    color: rebeccapurple
+}
+
+.task__remove {
+    cursor: pointer;
+    color: #a20d0d;
+}

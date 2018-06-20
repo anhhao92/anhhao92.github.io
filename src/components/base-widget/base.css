@@ -1,0 +1,31 @@
+.widget {
+  border: 1px solid #ccc;
+  flex: 1 1 100%;
+  max-width: 350px;
+  overflow: hidden;
+  margin-top: 10px; }
+  .widget-content {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 10px;
+    position: relative;
+    height: 250px; }
+
+.widget-header {
+  align-items: center;
+  background-color: #1e5281;
+  color: #fff;
+  display: flex;
+  flex: 1 1 100%;
+  justify-content: space-between;
+  padding: 8px 0; }
+  .widget-header__icon-group {
+    min-width: 70px;
+    display: flex;
+    font-size: 16px;
+    justify-content: space-around;
+    cursor: pointer; }
+  .widget-header__text {
+    font-size: 16px;
+    margin-left: 10px;
+    font-weight: 600; }
