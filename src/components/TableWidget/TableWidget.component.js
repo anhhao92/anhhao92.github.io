@@ -1,5 +1,6 @@
 import React from 'react'
-import { TableWidgetView } from './table.view'
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import { connect } from 'react-redux'
 import { fetchDataSource } from '../../actions/dataSource.action'
 
@@ -45,10 +46,18 @@ class TableWidget extends React.PureComponent {
               return <span>{from} to {to} of {size} {this.props.configs.dataSource}</span>
             }  
         }
-        if(!data){
-            return <span>No data to display</span>
-        }
-        return <TableWidgetView data={data} columns={displayColumns} paginationConf={paginationConf}/>
+        return !data 
+        ? <span>No data to display</span>
+        : <BootstrapTable 
+            keyField='id' 
+            data={data} 
+            columns={displayColumns} 
+            pagination={paginationFactory(paginationConf)}
+            bordered={false}
+            striped
+            hover
+            condensed 
+            />
     }
 }
 

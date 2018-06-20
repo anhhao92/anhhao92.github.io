@@ -1,8 +1,10 @@
 import React from 'react';
-import TextWidget from '../text-widget/text.component';
-import TableWidget from '../table-widget/table.component';
-import TodoWidget from '../todo-widget/todo-widget.component';
+import TextWidget from '../TextWidget/TextWidget.component';
+import TableWidget from '../TableWidget/TableWidget.component';
+import TodoWidget from '../TodoWidget/TodoWidget.component';
 import SimpleChartWidget from '../SimpleChartWidget/SimpleChart.component';
+import StockTickerWidget from '../StockTickerWidget/StockTickerWidget.component';
+import OrgChartWidget from '../OrgChartWidget/OrgChartWidget.component';
 import {FaCog, FaArrowsAlt, FaClose} from 'react-icons/lib/fa';
 import './base.css';
 
@@ -10,7 +12,9 @@ const SYSTEM_COMPONENTS = {
     'TEXT_WIDGET': TextWidget,
     'DATATABLE_WIDGET': TableWidget,
     'TODOLIST_WIDGET': TodoWidget,
-    'SIMPLECHART_WIDGET': SimpleChartWidget
+    'SIMPLECHART_WIDGET': SimpleChartWidget,
+    'STOCK_TICKER_WIDGET': StockTickerWidget,
+    'ORG_CHART_WIDGET': OrgChartWidget
 }
 
 export class BaseWidget extends React.PureComponent {

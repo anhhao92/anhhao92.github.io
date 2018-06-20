@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { TodoWidgetView } from './todo-widget.view'
+import { TodoWidgetView } from './TodoWidget.view'
 import { fetchToDoList, ToDoListCreator, VisibilityFilters } from '../../actions/todo.action'
 
 class TodoWidget extends React.PureComponent {
@@ -64,7 +64,7 @@ const getNumberOfIncompletedTasks = (todos, ownProps) => {
     if(todo){
         return todo.tasks.filter(t => !t.isCompleted).length;
     }
-    return null;
+    return 0;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoWidget)

@@ -1,5 +1,5 @@
 import React from 'react'
-import {BaseWidget} from '../../components/base-widget/base.component'
+import {BaseWidget} from '../../components/BaseWidget/BaseWidget.component'
 import './dashboard.css'
 
 export const DashboardView = ({dashboard}) => {

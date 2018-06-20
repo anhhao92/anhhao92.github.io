@@ -1,25 +1,42 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official';
-import HC_map from 'highcharts/modules/map'
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchDataReport } from '../../actions/simpleChart.action';
+import Highcharts from 'highcharts';
 
-HC_map(Highcharts)
+class SimpleChartWidget extends React.PureComponent {
+    
+    componentWillMount(){
+        const {dataSource, groupBy} = this.props.configs;
+        if(!this.props.dataReport.length){
+            this.props.dispatch(fetchDataReport(dataSource, groupBy))
+        }
+    }
 
-export default class SimpleChartWidget extends React.PureComponent {
+    componentDidUpdate(){
+        const chartOptions = {
+            chart: { type: 'pie' },
+            title: { text: null },
+            plotOptions: {
+                pie: {
+                    cursor: 'pointer',
+                    dataLabels: { enabled: false },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Total',
+                data: this.props.dataReport
+            }]
+        }
+        Highcharts.chart('container', chartOptions);
+    }
 
     render(){
-        const options = {
-            series: [{
-              data: [1, 2, 3]
-            }]
-          }
-        return (
-            <HighchartsReact
-                highcharts={Highcharts}
-                // constructorType={'chart'}
-                options={options}
-          />
-        )
+        return (<div id="container" />)
     }
 }
+const mapStateToProps = state => ({
+    dataReport: state.dataReport
+})
+
+export default connect(mapStateToProps)(SimpleChartWidget)

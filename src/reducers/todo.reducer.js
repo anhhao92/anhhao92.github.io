@@ -10,19 +10,7 @@ export const todos = (state = [], action) => {
                 }
             ]
         case 'ADD_TODO':
-            return state.map(todo => {
-                if(todo.widgetId === action.widgetId){
-                    todo.tasks = [
-                        ...todo.tasks,
-                        {
-                            id: action.id,
-                            task: action.task,
-                            isCompleted: false,
-                            userId: 1
-                        }]
-                }
-                return todo;
-            })
+            return insertOrUpdateTodo(state, action)
         case 'TOGGLE_TODO':
             const currentTodo = state.find(m => m.widgetId === action.widgetId);
             const tasks = currentTodo.tasks.map(task => task.id === action.id 
@@ -46,5 +34,29 @@ export const todos = (state = [], action) => {
                 : todo)
         default:
             return state
+    }
+}
+
+const insertOrUpdateTodo = (state, action) => {
+    const widget = state.find(m => m.widgetId === action.widgetId);
+    if(!widget){
+        return [{
+            visibilityFilter: 'SHOW_ALL',
+            widgetId: action.widgetId,
+            tasks: [{
+                id: action.id,
+                task: action.task,
+                isCompleted: false,
+                userId: 1
+            }]     
+        }]
+    } else {
+        widget.tasks.push({
+            id: action.id,
+            task: action.task,
+            isCompleted: false,
+            userId: 1   
+        })
+        return state.map(todo => todo.widgetId === action.widgetId ? widget : todo);
     }
 }
