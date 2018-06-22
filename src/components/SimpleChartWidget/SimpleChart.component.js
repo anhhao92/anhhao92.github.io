@@ -14,7 +14,7 @@ class SimpleChartWidget extends React.PureComponent {
 
     componentDidUpdate(){
         const chartOptions = {
-            chart: { type: 'pie' },
+            chart: { type: 'pie', height: 300 },
             title: { text: null },
             plotOptions: {
                 pie: {
