@@ -3,7 +3,9 @@
   font-weight: 600;
   color: #1e5281;
   border-bottom: 2px solid #1e5281;
-  padding: 10px 0; }
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between; }
 
 .dashboard__body {
   display: flex;
@@ -19,3 +21,7 @@
   justify-content: space-between;
   position: relative;
   width: 100%; }
+
+.icon-container > svg {
+  margin-left: 10px;
+  cursor: pointer; }
