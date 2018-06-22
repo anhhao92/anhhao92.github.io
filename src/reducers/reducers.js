@@ -4,6 +4,7 @@ import { dashboard } from './dashboard.reducer'
 import { dataSource } from './dataSource.reducer'
 import { todos } from './todo.reducer'
 import { dataReport } from './simpleChart.reducer'
+import { stockTicker } from './stockTicker.reducer'
 
 
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
   dashboard,
   dataSource,
   todos,
-  dataReport
+  dataReport,
+  stockTicker
 })

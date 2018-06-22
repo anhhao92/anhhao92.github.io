@@ -1,0 +1,13 @@
+.arrow-up {
+  background: #58b55c;
+  padding: 4px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 600; }
+
+.arrow-down {
+  background: #dc4c53;
+  padding: 4px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 600; }

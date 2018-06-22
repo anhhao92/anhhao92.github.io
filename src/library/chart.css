@@ -1,0 +1,210 @@
+.tree {
+  width: auto;
+  transform: scale(0.3, 0.3);
+  transform-origin: 0 0;
+}
+.tree ul {
+  padding-left: 0;
+  padding-top: 20px;
+  position: relative;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  display: flex;
+}
+.tree li {
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 20px 5px 0 5px;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+/*We will use ::before and ::after to draw the connectors*/
+.tree li::before, .tree li::after {
+  content:'';
+  position: absolute;
+  top: 0;
+  right: 50%;
+  border-top: 1px solid #ccc;
+  width: 50%;
+  height: 20px;
+}
+.tree li:after {
+  right: auto;
+  left: 50%;
+  border-left: 1px solid #ccc;
+}
+/*We need to remove left-right connectors from elements without
+any siblings*/
+.tree li:only-child::after, .tree li:only-child::before {
+  display: none;
+}
+/*Remove space from the top of single children*/
+.tree li:only-child {
+  padding-top: 0;
+}
+/*Remove left connector from first child and
+right connector from last child*/
+.tree li:first-child::before, .tree li:last-child::after {
+  border: 0 none;
+}
+/*Adding back the vertical connector to the last nodes*/
+.tree li:last-child::before {
+  border-right: 1px solid #ccc;
+  border-radius: 0 5px 0 0;
+  -webkit-border-radius: 0 5px 0 0;
+  -moz-border-radius: 0 5px 0 0;
+}
+.tree li:first-child::after {
+  border-radius: 5px 0 0 0;
+  -webkit-border-radius: 5px 0 0 0;
+  -moz-border-radius: 5px 0 0 0;
+}
+/*Time to add downward connectors from parents*/
+.tree ul ul::before {
+  content:'';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 1px solid #ccc;
+  width: 1px;
+  height: 20px;
+  margin-left: 1px;
+}
+.tree li a {
+  border: 2px solid #ccc;
+  padding: 10px 10px;
+  color: #666;
+  display: inline-block;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  position: relative;
+  cursor: pointer;
+}
+/*Time for some hover effects*/
+/*We will apply the hover effect the the lineage of the element also*/
+.tree li a:hover, .tree li a:hover+ul li a {
+  background: #c8e4f8;
+  /*color: #000;*/
+  /*border: 1px solid #94a0b4;*/
+}
+/*Connector styles on hover*/
+.tree li a:hover+ul li::after, .tree li a:hover+ul li::before, .tree li a:hover+ul::before, .tree li a:hover+ul ul::before {
+  border-color: #94a0b4;
+}
+
+.profile__container{
+  display: flex;
+  text-align: left;
+  min-width: 300px;
+  max-width: 450px;
+}
+.profile__container__basic{
+  display: flex;
+}
+.profile__container__basic__info,
+.profile__container__basic__info--edit{
+  padding: 0 0.8rem;
+}
+.profile__container__basic--edit{
+  display: none;
+}
+.profile__container__basic__info--edit input[type='text']{
+  border: none;
+  border-bottom: 2px dashed black;
+  outline: none;
+  width: 150px;
+}
+.profile__container__basic__avatar-upload--edit{
+  display: none;
+}
+.profile__container__basic__avatar,
+.profile__container__basic__avatar--edit{
+  border: 2px solid #c5c5c5 ;
+  padding: 4px;
+  border-radius: 5px;
+}
+/*Fit the avatar*/
+.profile__container__basic__avatar {
+  width: 102px;
+  height: 112px;
+}
+
+.profile__container__basic__avatar img{
+  width: 90px;
+  height: 100px;
+}
+
+.profile__container__basic__avatar--edit{
+  border: 2px dashed black;
+}
+.name{
+  min-height: 28px;
+}
+.nickname{
+  min-height: 18px;
+}
+.name,
+.profile__container__basic__info--edit .name input[type='text']{
+  font-size: 24px;
+  font-weight: 600;
+}
+.role,
+.nickname,
+.profile__container__basic__info--edit .nickname input[type='text']{
+  font-size: 16px;
+  font-weight: 600;
+}
+/*Handle very long text*/
+.name,
+.role,
+.nickname{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 300px;
+  font-weight: 600;
+}
+
+.name,
+.nickname,
+.profile__container__basic__info--edit .name input[type='text'],
+.profile__container__basic__info--edit .nickname input[type='text']{
+  color: #14b1e7;
+}
+.profile__container__basic__info--edit .name input[type='text']{
+  padding-top: 8px;
+}
+.role{
+  padding: 0.6rem 0;
+  font-style: italic;
+}
+.nickname{
+  text-decoration: underline;
+}
+
+.profile__container__action{
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  /*Pin element to right*/
+  margin-left: auto;
+}
+/*icon size*/
+.profile__container__action i,
+.toggle-tree{
+  padding: 4px;
+  font-size: 18px;
+}
+.toggle-tree{
+  margin-bottom: -20px;
+}
+.toggle-tree [name='expand_button']{
+  display: none;
+}

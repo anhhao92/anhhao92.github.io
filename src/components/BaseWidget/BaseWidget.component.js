@@ -26,17 +26,19 @@ export class BaseWidget extends React.PureComponent {
 
     render() {
         return (
-            <div className='widget'>
-                <div className='widget-header'>
-                    <div className='widget-header__text'>{this.props.title}</div>
-                    <div className='widget-header__icon-group'>
-                        <FaCog />
-                        <FaArrowsAlt />
-                        <FaClose />
+            <div className='col-4'>
+                <div className='widget'>
+                    <div className='widget-header'>
+                        <div className='widget-header__text'>{this.props.title}</div>
+                        <div className='widget-header__icon-group'>
+                            <FaCog />
+                            <FaArrowsAlt />
+                            <FaClose />
+                        </div>
                     </div>
-                </div>
-                <div className='widget-content'>
-                    {this.getWidgetContent()}
+                    <div className='widget-content'>
+                        {this.getWidgetContent()}
+                    </div>
                 </div>
             </div>
         )

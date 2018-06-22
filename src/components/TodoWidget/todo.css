@@ -22,7 +22,7 @@
   margin-right: 10px; }
 
 .todo__input {
-  padding-bottom: 10px; }
+  padding: 10px 0; }
 
 .todo__header {
   padding-bottom: 10px;
