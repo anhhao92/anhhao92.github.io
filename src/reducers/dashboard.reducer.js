@@ -24,6 +24,17 @@ export const dashboard = (state = {}, action) => {
                 ...state,
                 isEdit: payload
             }
+        case DashboardAction.DELETE_WIDGET:
+            let result = {}
+            Object.keys(state.widgets).forEach(id => {
+                if(id !== payload){
+                    result[id] = state.widgets[id]
+                }
+            });
+            return {
+                ...state,
+                widgets: result
+            }
         default:
             return state
     }

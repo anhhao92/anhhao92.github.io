@@ -11,7 +11,7 @@ export const DashboardView = ({dashboard, onChangeLayout}) => {
         const props = dashboard.widgets[id];
         const WidgetComponent = SYSTEM_COMPONENTS[props.widgetType];
         return (    
-            <BaseWidget key={id} title={props.title} isEdit={dashboard.isEdit}>
+            <BaseWidget key={id} id={id} title={props.title} isEdit={dashboard.isEdit}>
                 <WidgetComponent {...props} />
             </BaseWidget>
         )

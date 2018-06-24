@@ -14,7 +14,7 @@ export const SimpleChartActionCreator = {
 export const fetchDataReport = (source, field) => dispatch => {
     const dataType = source.toLowerCase();
     const dataField = field.toLowerCase();
-    fetch(`api/reports/_countby/${dataType}/${dataField}`)
+    fetch(`/api/reports/_countby/${dataType}/${dataField}`)
     .then(res => res && res.json())
     .then((data)  => {
         const result = Object.keys(data).map((key) => ({name: key, y: data[key]}))

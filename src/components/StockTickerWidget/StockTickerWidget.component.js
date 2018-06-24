@@ -13,7 +13,7 @@ class StockTickerWidget extends React.PureComponent {
 
     // Disconnect ws
     componentWillUnmount(){
-        disconnectWebSocker();
+        //disconnectWebSocker();
     }
 
     render(){

@@ -1,3 +1,13 @@
+.xs-scale {
+  transform: scale(0.21, 0.21);
+  transform-origin: 0 0;
+}
+
+.lg-scale {
+  transform: scale(0.71, 0.71);
+  transform-origin: 0 0;
+}
+
 .tree {
   width: auto;
   transform: scale(0.21, 0.21);

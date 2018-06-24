@@ -5,6 +5,8 @@ import { DashboardView } from './dashboard.view'
 import { LAYOUT_TYPES, LAYOUT_STYLES } from '../../constants/LayoutType';
 import { DashboardActionCreator } from '../../actions/dashboard.action';
 
+import BaseWidgetSetting from '../../components/WidgetSetting/BaseWidgetSetting.component'
+
 class Dashboard extends React.PureComponent {
     constructor(props){
         super(props);
@@ -17,7 +19,6 @@ class Dashboard extends React.PureComponent {
 
     componentDidUpdate(){
         const {isEdit} = this.props.dashboard;
-        console.log(this.props.dashboard, this.drake)
         if(isEdit) {
             this.drake = dragula([document.getElementById('wrapper')], { direction: 'horizontal'});
         }
@@ -25,6 +26,10 @@ class Dashboard extends React.PureComponent {
             this.drake && this.drake.destroy();
             this.drake = null;
         }
+    }
+
+    componentWillUnmount(){
+        this.drake && this.drake.destroy();
     }
 
     updateLayout(layoutType){
@@ -48,7 +53,9 @@ class Dashboard extends React.PureComponent {
     }
 
     render() {
-        return <DashboardView dashboard={this.props.dashboard} onChangeLayout={this.onChangeLayout}/>
+        return (<div>
+            <DashboardView dashboard={this.props.dashboard} onChangeLayout={this.onChangeLayout}/>
+        </div>)
     }
 }
 

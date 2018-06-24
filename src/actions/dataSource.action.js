@@ -19,7 +19,7 @@ export const fetchDataSource = type => dispatch => {
             break;
     }
 
-    fetch(`api/${dataType}/`)
+    fetch(`/api/${dataType}/`)
     .then(res => res && res.json())
     .then((data)  => {
         dataResult[dataType] = data

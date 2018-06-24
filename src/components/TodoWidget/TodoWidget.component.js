@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { TodoWidgetView } from './TodoWidget.view'
-import { fetchToDoList, ToDoListCreator, VisibilityFilters } from '../../actions/todo.action'
+import { fetchToDoList, ToDoListCreator } from '../../actions/todo.action'
 import { getVisibilityFilter, getVisibleTodos, getTotalInCompletedTasks } from '../../selectors/todoSelectors'
 
 
@@ -18,29 +18,25 @@ class TodoWidget extends React.PureComponent {
         }
     }
 
-    setAll = () => {
-        const {dispatch, widgetId} = this.props;
-        console.log(this)
-        this.props.setFilter(VisibilityFilters.SHOW_ALL);
+    setVisibilityFilter = (filter) => (e) => {
+        this.props.setFilter(filter);
     }
 
-    setActive = () => {
-        const {dispatch, widgetId} = this.props;
-        this.props.setFilter(VisibilityFilters.SHOW_ACTIVE);
+    updateTodo = (id) => (e) => {
+        this.props.toggleTodo(id);
     }
 
-    setCompleted = () => {
-        const {dispatch, widgetId} = this.props;
-        this.props.setFilter(VisibilityFilters.SHOW_COMPLETED);
+    deleteTodo = (id) => (e) => {
+        this.props.removeTodo(id);
     }
 
     render() {
         return(
             <TodoWidgetView 
                 onEnter={this.onEnterPress} 
-                setAll={this.setAll} 
-                setActive={this.setActive} 
-                setCompleted={this.setCompleted} 
+                setVisibilityFilter={this.setVisibilityFilter}
+                updateTodo={this.updateTodo}
+                deleteTodo={this.deleteTodo}
                 {...this.props}
             />
         )

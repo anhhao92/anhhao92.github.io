@@ -30,6 +30,8 @@
     "socket.io-client": "^2.1.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b master -d build",
     "precommit": "lint-staged",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
@@ -49,5 +51,9 @@
       "ws": true,
       "logLevel": "debug"
     }
-  }
+  },
+  "devDependencies": {
+    "gh-pages": "^1.2.0"
+  },
+  "homepage": "https://anhhao92.github.io"
 }

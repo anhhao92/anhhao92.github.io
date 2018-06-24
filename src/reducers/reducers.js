@@ -5,7 +5,7 @@ import { dataSource } from './dataSource.reducer'
 import { todos } from './todo.reducer'
 import { dataReport } from './simpleChart.reducer'
 import { stockTicker } from './stockTicker.reducer'
-
+import { modalSetting } from './modalSetting.reducer'
 
 export default combineReducers({
   routing: routerReducer,
@@ -13,5 +13,6 @@ export default combineReducers({
   dataSource,
   todos,
   dataReport,
-  stockTicker
+  stockTicker,
+  modalSetting
 })

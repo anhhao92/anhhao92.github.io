@@ -5,6 +5,27 @@ import Highcharts from 'highcharts';
 
 class SimpleChartWidget extends React.PureComponent {
     
+    renderChart(){
+        if(this.props.dataReport.length){
+            const chartOptions = {
+                chart: { type: 'pie', height: this.props.isScale ? "auto" : 300 },
+                title: { text: null },
+                plotOptions: {
+                    pie: {
+                        cursor: 'pointer',
+                        dataLabels: { enabled: false },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Total',
+                    data: this.props.dataReport
+                }]
+            }
+            this.highChart = Highcharts.chart('container', chartOptions);
+        }
+    }
+
     componentWillMount(){
         const {dataSource, groupBy} = this.props.configs;
         if(!this.props.dataReport.length){
@@ -12,27 +33,16 @@ class SimpleChartWidget extends React.PureComponent {
         }
     }
 
+    componentDidMount(){
+        this.renderChart();
+    }
+
     componentDidUpdate(){
-        const chartOptions = {
-            chart: { type: 'pie', height: 300 },
-            title: { text: null },
-            plotOptions: {
-                pie: {
-                    cursor: 'pointer',
-                    dataLabels: { enabled: false },
-                    showInLegend: true
-                }
-            },
-            series: [{
-                name: 'Total',
-                data: this.props.dataReport
-            }]
-        }
-        Highcharts.chart('container', chartOptions);
+        this.renderChart();
     }
 
     render(){
-        return (<div id="container" />)
+        return (<div id="container" className="d-block mx-auto" />)
     }
 }
 const mapStateToProps = state => ({

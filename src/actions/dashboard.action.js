@@ -2,7 +2,8 @@ export const DashboardAction = {
     'DASHBOARD_CREATION': 'DASHBOARD_CREATION',
     'CHANGE_LAYOUT': 'CHANGE_LAYOUT',
     'DASHBOARD_SWITCH_MODE': 'DASHBOARD_SWITCH_MODE',
-    'DASHBOARD_UPDATE_CONFIG': 'DASHBOARD_UPDATE_CONFIG'
+    'DASHBOARD_UPDATE_CONFIG': 'DASHBOARD_UPDATE_CONFIG',
+    'DELETE_WIDGET': 'DELETE_WIDGET'
 }
 
 export const DashboardActionCreator = {
@@ -21,5 +22,9 @@ export const DashboardActionCreator = {
     switchMode: (isEdit) => ({
         type: DashboardAction.DASHBOARD_SWITCH_MODE,
         payload: isEdit    
-    })
+    }),
+    deleteWidget: (id) => ({
+        type: DashboardAction.DELETE_WIDGET,
+        payload: id    
+    }),
 }

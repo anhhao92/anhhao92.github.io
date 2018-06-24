@@ -25,5 +25,5 @@
   margin-right: 5px;
   cursor: pointer; }
 
-.widget-header__icon-group .pointer {
-  cursor: move; }
+.widget-header__icon-group a {
+  color: #fff; }

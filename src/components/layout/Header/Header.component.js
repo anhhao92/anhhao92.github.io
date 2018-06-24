@@ -1,12 +1,13 @@
 import React from 'react'
-import { Navbar, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
-import { FaUser } from 'react-icons/lib/fa'
+import { Navbar, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { Link } from 'react-router-dom'
+import { FaUser, FaDashboard } from 'react-icons/lib/fa'
 import { connect } from 'react-redux'
 import { DashboardActionCreator } from '../../../actions/dashboard.action';
 
 const Header = ({isEdit, onClickView, onClickEdit}) => (
     <Navbar>
-        <NavbarBrand href="/">Dashboard</NavbarBrand>
+        <Link className="navbar-brand" to="/"><FaDashboard style={{verticalAlign: 'text-top'}}/> Dashboard</Link>
         <Nav navbar>
             <UncontrolledDropdown nav>
                 <DropdownToggle nav caret>
@@ -23,12 +24,11 @@ const Header = ({isEdit, onClickView, onClickEdit}) => (
     </Navbar >
 )
 
-
 const mapStateToProps = state => ({
     isEdit: state.dashboard.isEdit
 })
 
-const mapDispatchToProps = (dispatch, state) => ({
+const mapDispatchToProps = dispatch => ({
     onClickView: () => dispatch(DashboardActionCreator.switchMode(false)),
     onClickEdit: () => dispatch(DashboardActionCreator.switchMode(true))
 })
