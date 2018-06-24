@@ -24,17 +24,20 @@ $header-color: #1e5281;
   justify-content: space-between;
   padding: 8px 0;
 
-  &__icon-group {
-    min-width: 70px;
-    display: flex;
-    font-size: 16px;
-    justify-content: space-around;
-    cursor: pointer;
-  }
-
   &__text {
     font-size: 16px;
     margin-left: 10px;
     font-weight: 600;
+  }
+}
+
+.widget-header__icon-group {
+  svg {
+    margin-right: 5px;
+    cursor: pointer;
+  }
+
+  .pointer{
+    cursor: move;
   }
 }

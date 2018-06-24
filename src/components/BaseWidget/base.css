@@ -16,13 +16,14 @@
   flex: 1 1 100%;
   justify-content: space-between;
   padding: 8px 0; }
-  .widget-header__icon-group {
-    min-width: 70px;
-    display: flex;
-    font-size: 16px;
-    justify-content: space-around;
-    cursor: pointer; }
   .widget-header__text {
     font-size: 16px;
     margin-left: 10px;
     font-weight: 600; }
+
+.widget-header__icon-group svg {
+  margin-right: 5px;
+  cursor: pointer; }
+
+.widget-header__icon-group .pointer {
+  cursor: move; }

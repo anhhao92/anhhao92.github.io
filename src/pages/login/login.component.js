@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect, withRoute } from 'react-router-dom'
+import React from 'react';
+import { Route, Redirect} from 'react-router-dom'
 
 const fakeAuth = {
   isAuthenticated: false,

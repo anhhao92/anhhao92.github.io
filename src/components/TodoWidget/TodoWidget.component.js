@@ -2,34 +2,60 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { TodoWidgetView } from './TodoWidget.view'
 import { fetchToDoList, ToDoListCreator, VisibilityFilters } from '../../actions/todo.action'
+import { getVisibilityFilter, getVisibleTodos, getTotalInCompletedTasks } from '../../selectors/todoSelectors'
+
 
 class TodoWidget extends React.PureComponent {
-    constructor(props){
-        super(props);
-        this.onEnterPress = this.onEnterPress.bind(this);
-    }
-
     componentWillMount(){
-        this.props.fetchToDoList(this.props.widgetId)
+        const {fetchToDoList, widgetId} = this.props;
+        fetchToDoList(widgetId)
     }
 
-    onEnterPress(e){
+    onEnterPress = (e) => {
         if (e.key === 'Enter') {
             this.props.addToDo(this.props.widgetId, e.target.value);
             e.target.value = '';
         }
     }
 
+    setAll = () => {
+        const {dispatch, widgetId} = this.props;
+        console.log(this)
+        this.props.setFilter(VisibilityFilters.SHOW_ALL);
+    }
+
+    setActive = () => {
+        const {dispatch, widgetId} = this.props;
+        this.props.setFilter(VisibilityFilters.SHOW_ACTIVE);
+    }
+
+    setCompleted = () => {
+        const {dispatch, widgetId} = this.props;
+        this.props.setFilter(VisibilityFilters.SHOW_COMPLETED);
+    }
+
     render() {
         return(
-            <TodoWidgetView onEnter={this.onEnterPress} {...this.props}/>
+            <TodoWidgetView 
+                onEnter={this.onEnterPress} 
+                setAll={this.setAll} 
+                setActive={this.setActive} 
+                setCompleted={this.setCompleted} 
+                {...this.props}
+            />
         )
     }
 }
-const mapStateToProps = (state, ownProps) => ({
-    todos: getVisibleTodos(state.todos, ownProps),
-    numberOfIncompletedTasks: getNumberOfIncompletedTasks(state.todos, ownProps)
-})
+
+const mapStateToProps = () => {
+    const getVisibleTodoLists = getVisibleTodos()
+    const numberOfIncompleted = getTotalInCompletedTasks()
+    return (state, props) => ({
+        todos: getVisibleTodoLists(state.todos, props),
+        numberOfIncompletedTasks: numberOfIncompleted(state.todos, props),
+        filter: getVisibilityFilter(state.todos, props)
+    })
+}
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     addToDo: (id, text) => dispatch(ToDoListCreator.addTodo(id, text)),
@@ -37,34 +63,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setFilter: filter => dispatch(ToDoListCreator.setVisibilityFilter(ownProps.widgetId, filter)),
     toggleTodo: id => dispatch(ToDoListCreator.toggleTodo(ownProps.widgetId, id)),
     removeTodo: id => dispatch(ToDoListCreator.removeTodo(ownProps.widgetId, id))
-
 })
-
-const getVisibleTodos = (todos, ownProps) => {
-    const todo = todos.find(t => t.widgetId === ownProps.widgetId);
-    if(todo){
-        const filter = todo.visibilityFilter;
-        const tasks = todo.tasks;
-        switch (filter) {
-          case VisibilityFilters.SHOW_ALL:
-            return tasks
-          case VisibilityFilters.SHOW_COMPLETED:
-            return tasks.filter(t => t.isCompleted)
-          case VisibilityFilters.SHOW_ACTIVE:
-            return tasks.filter(t => !t.isCompleted)
-          default:
-            throw new Error('Unknown filter: ' + filter)
-        }
-    }
-    return todos;
-}
-
-const getNumberOfIncompletedTasks = (todos, ownProps) => {
-    const todo = todos.find(t => t.widgetId === ownProps.widgetId);
-    if(todo){
-        return todo.tasks.filter(t => !t.isCompleted).length;
-    }
-    return 0;
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoWidget)

@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-// import { fetchDataReport } from '../../actions/simpleChart.action';
-import OrgChart from '../../library/app.bundle';
+import React from 'react'
+import { connect } from 'react-redux'
+import OrgChart from '../../library/chart.bundle'
 import '../../library/chart.css'
+
 class OrgChartWidget extends React.PureComponent {
     
     componentDidUpdate(){

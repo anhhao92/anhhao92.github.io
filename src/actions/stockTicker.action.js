@@ -1,6 +1,6 @@
 import Socket from 'socket.io-client'
 
-const socket = Socket('/');
+const socket = null;//Socket('/');
 export const StockTickerAction = {
     'LOAD_INIT_STOCK': 'LOAD_INIT_STOCK',
     'UPDATE_PRICE': 'UPDATE_PRICE'

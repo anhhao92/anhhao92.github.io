@@ -1,3 +1,4 @@
+@import url(~dragula/dist/dragula.css);
 .dashboard__title {
   font-size: 20px;
   font-weight: 600;
@@ -22,6 +23,15 @@
   position: relative;
   width: 100%; }
 
-.icon-container > svg {
-  margin-left: 10px;
-  cursor: pointer; }
+.dashboard-layout {
+  width: 180px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .dashboard-layout--active {
+    opacity: 0.5; }
+  .dashboard-layout svg {
+    cursor: pointer; }
+
+#wrapper > div {
+  transition: all ease-in 0.5s; }

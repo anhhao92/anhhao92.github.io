@@ -6,6 +6,7 @@ import { VisibilityFilters } from '../../actions/todo.action'
 import "./todo.css"
 
 export const TodoWidgetView = (props) => {
+    console.log(props)
     return (
         <div>
             <InputGroup className="todo__input">
@@ -14,9 +15,9 @@ export const TodoWidgetView = (props) => {
             <div className="todo__header">
                 <span className="todo__remain">{props.numberOfIncompletedTasks} items left</span>
                 <span className="todo__filter">
-                    <Button size="sm" onClick={() => props.setFilter(VisibilityFilters.SHOW_ALL)}>All</Button>
-                    <Button size="sm" onClick={() => props.setFilter(VisibilityFilters.SHOW_ACTIVE)}>Active</Button>
-                    <Button size="sm" onClick={() => props.setFilter(VisibilityFilters.SHOW_COMPLETED)}>Completed</Button>
+                    <Button size="sm" onClick={props.setAll}>All</Button>
+                    <Button size="sm" onClick={props.setActive}>Active</Button>
+                    <Button size="sm" onClick={props.setCompleted}>Completed</Button>
                 </span>
             </div>
             <Table>
