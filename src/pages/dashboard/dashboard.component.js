@@ -5,8 +5,6 @@ import { DashboardView } from './dashboard.view'
 import { LAYOUT_TYPES, LAYOUT_STYLES } from '../../constants/LayoutType';
 import { DashboardActionCreator } from '../../actions/dashboard.action';
 
-import BaseWidgetSetting from '../../components/WidgetSetting/BaseWidgetSetting.component'
-
 class Dashboard extends React.PureComponent {
     constructor(props){
         super(props);
@@ -53,9 +51,7 @@ class Dashboard extends React.PureComponent {
     }
 
     render() {
-        return (<div>
-            <DashboardView dashboard={this.props.dashboard} onChangeLayout={this.onChangeLayout}/>
-        </div>)
+        return <DashboardView dashboard={this.props.dashboard} onChangeLayout={this.onChangeLayout}/>
     }
 }
 

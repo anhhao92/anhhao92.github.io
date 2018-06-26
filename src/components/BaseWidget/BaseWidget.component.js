@@ -7,25 +7,31 @@ import './base.css';
 
 class BaseWidget extends React.PureComponent {
     onClickSetting = () => {
-        console.log(this.props.id)
+        const {dispatch, widgetId} = this.props;
+        dispatch(DashboardActionCreator.switchWidgetToSettingMode(widgetId));
     }
 
     onDelete = () => {
-        const {dispatch, id} = this.props;
-        dispatch(DashboardActionCreator.deleteWidget(id));
+        const {dispatch, widgetId} = this.props;
+        dispatch(DashboardActionCreator.deleteWidget(widgetId));
+    }
+
+    saveAndClose = () => {
+        const {dispatch, widgetId} = this.props;
+        dispatch(DashboardActionCreator.switchWidgetToSettingMode(widgetId, false));
     }
 
     render() {
-        const {title, isEdit, id, children} = this.props;
+        const {widgetId, title, isEditDashboard, isEditing, children} = this.props;
         return (
-            <div className="col-4">
+        <div className="col-4">
             <div className='widget'>
                 <div className='widget-header'>
                     <div className='widget-header__text'>{title}</div>
                     <div className='widget-header__icon-group'>
-                        {isEdit && <FaCog onClick={this.onClickSetting} />}
-                        <Link to={`/view/${id}`}><FaArrowsAlt /></Link>
-                        {isEdit && <FaClose onClick={this.onDelete} />}
+                        {!isEditing && isEditDashboard && <FaCog onClick={this.onClickSetting} />}
+                        {!isEditing && <Link to={`/view/${widgetId}`}><FaArrowsAlt /></Link>}
+                        {isEditDashboard && <FaClose onClick={isEditing ? this.saveAndClose : this.onDelete} />}
                     </div>
                 </div>
                 <div className='widget-content'>

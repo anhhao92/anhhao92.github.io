@@ -3,15 +3,15 @@ import BaseWidget from '../../components/BaseWidget/BaseWidget.component'
 
 import { FaStop, FaThList, FaTh, FaThLarge } from 'react-icons/lib/fa';
 import { MdViewArray } from 'react-icons/lib/md';
-import { LAYOUT_TYPES, SYSTEM_COMPONENTS } from '../../constants';
+import { LAYOUT_TYPES, SYSTEM_COMPONENTS, SETTING_COMPONENTS } from '../../constants';
 import './dashboard.css'
 
 export const DashboardView = ({dashboard, onChangeLayout}) => {
     const widgets = Object.keys(dashboard.widgets).map((id) => {
         const props = dashboard.widgets[id];
-        const WidgetComponent = SYSTEM_COMPONENTS[props.widgetType];
+        const WidgetComponent = props.isEditing ? SETTING_COMPONENTS[props.widgetType] : SYSTEM_COMPONENTS[props.widgetType];
         return (    
-            <BaseWidget key={id} id={id} title={props.title} isEdit={dashboard.isEdit}>
+            <BaseWidget key={id} isEditDashboard={dashboard.isEdit} {...props}>
                 <WidgetComponent {...props} />
             </BaseWidget>
         )

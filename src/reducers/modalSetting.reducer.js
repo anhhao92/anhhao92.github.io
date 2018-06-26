@@ -1,6 +1,6 @@
 const initialState = {
-    modalType: null,
-    modalProps: {}
+  modalType: null,
+  modalProps: {}
 }
 export const modalSetting = (state = initialState, action) => {
   switch (action.type) {

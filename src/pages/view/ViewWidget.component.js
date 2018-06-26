@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { getWidgetInfo } from '../../selectors/viewSelector'
+import { getWidgetState } from '../../selectors/viewSelector'
 import { SYSTEM_COMPONENTS } from '../../constants';
 
 const ViewWidget = ({widget}) => {
@@ -15,7 +15,7 @@ const ViewWidget = ({widget}) => {
 }
 
 const mapStateToProps = (state, props) => ({
-    widget: getWidgetInfo(state.dashboard, props)
+    widget: getWidgetState(state.dashboard, props)
 })
 
 export default connect(mapStateToProps)(ViewWidget)

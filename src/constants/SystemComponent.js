@@ -5,10 +5,22 @@ import SimpleChartWidget from '../components/SimpleChartWidget/SimpleChart.compo
 import StockTickerWidget from '../components/StockTickerWidget/StockTickerWidget.component';
 import OrgChartWidget from '../components/OrgChartWidget/OrgChartWidget.component';
 
+import TextSetting from '../components/TextWidget/TextSetting.component';
+import TableSetting from '../components/TableWidget/TableSetting.component';
+
 export const SYSTEM_COMPONENTS = {
     'TEXT_WIDGET': TextWidget,
     'DATATABLE_WIDGET': TableWidget,
     'TODOLIST_WIDGET': TodoWidget,
+    'SIMPLECHART_WIDGET': SimpleChartWidget,
+    'STOCK_TICKER_WIDGET': StockTickerWidget,
+    'ORG_CHART_WIDGET': OrgChartWidget
+}
+
+export const SETTING_COMPONENTS = {
+    'TEXT_WIDGET': TextSetting,
+    'DATATABLE_WIDGET': TableSetting,
+    // 'TODOLIST_WIDGET': TodoWidget,
     'SIMPLECHART_WIDGET': SimpleChartWidget,
     'STOCK_TICKER_WIDGET': StockTickerWidget,
     'ORG_CHART_WIDGET': OrgChartWidget

@@ -13,11 +13,7 @@ export const dashboard = (state = {}, action) => {
             }
         case DashboardAction.DASHBOARD_UPDATE_CONFIG:
             return {
-                ...state,
-                // widgets: state.map(widget => widget.widgetId === payload.widgetId 
-                //     ? {...widget, ...payload.configs} 
-                //     : widget
-                // )
+                ...state
             }
         case DashboardAction.DASHBOARD_SWITCH_MODE:
             return {
@@ -25,15 +21,18 @@ export const dashboard = (state = {}, action) => {
                 isEdit: payload
             }
         case DashboardAction.DELETE_WIDGET:
-            let result = {}
-            Object.keys(state.widgets).forEach(id => {
-                if(id !== payload){
-                    result[id] = state.widgets[id]
-                }
-            });
+            delete state.widgets[payload]
+            return {...state}
+        case DashboardAction.SWITCH_WIDGET_TO_SETTING:
             return {
                 ...state,
-                widgets: result
+                widgets: {
+                    ...state.widgets,
+                    [payload.id]: {
+                        ...state.widgets[payload.id],
+                        isEditing: payload.isEditing
+                    }
+                }
             }
         default:
             return state
