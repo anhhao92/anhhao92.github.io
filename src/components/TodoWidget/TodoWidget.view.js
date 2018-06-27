@@ -6,7 +6,7 @@ import "./todo.css"
 
 export const TodoWidgetView = (props) => {
     return (
-        <div className="d-block mx-auto">
+        <div className="d-block mx-auto box-view">
             <InputGroup className="todo__input">
                 <Input onKeyPress={props.onEnter} className="input--custom" placeholder="What needs to be done?" />
             </InputGroup>

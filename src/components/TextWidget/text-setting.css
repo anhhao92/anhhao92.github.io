@@ -1,0 +1,6 @@
+@import url(~react-draft-wysiwyg/dist/react-draft-wysiwyg.css);
+.text-wrapper {
+  box-sizing: border-box; }
+
+.text-editor {
+  overflow: hidden; }

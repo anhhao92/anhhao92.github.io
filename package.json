@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.1",
+    "draft-js": "^0.10.5",
+    "draft-js-export-html": "^1.2.0",
     "dragula": "^3.7.2",
     "highcharts": "^6.1.0",
     "history": "^4.7.2",
@@ -16,6 +18,7 @@
     "react-bootstrap-table-next": "^0.1.13",
     "react-bootstrap-table2-paginator": "^0.1.4",
     "react-dom": "^16.4.0",
+    "react-draft-wysiwyg": "^1.12.13",
     "react-icons": "^2.2.7",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",

@@ -47,7 +47,7 @@ class TableWidget extends React.PureComponent {
             }  
         }
         return !data 
-        ? <div>No data to display</div>
+        ? <div className="box-view">No data to display</div>
         : <BootstrapTable 
             keyField='id' 
             data={data} 

@@ -7,7 +7,11 @@ import './base.css';
 
 class BaseWidget extends React.PureComponent {
     onClickSetting = () => {
-        const {dispatch, widgetId} = this.props;
+        const {dispatch, widgetId, widgetType} = this.props;
+        if(widgetType === 'TODOLIST_WIDGET'){
+            alert('No setting for this type')
+            return;
+        }
         dispatch(DashboardActionCreator.switchWidgetToSettingMode(widgetId));
     }
 

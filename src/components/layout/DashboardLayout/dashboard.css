@@ -5,3 +5,6 @@
   color: #fff; }
   .navbar-brand:hover, .dropdown-toggle:hover {
     color: #fff; }
+
+.box-view {
+  padding: 5px 5px 0 5px; }
