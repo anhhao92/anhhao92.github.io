@@ -4,9 +4,9 @@ import TodoWidget from '../components/TodoWidget/TodoWidget.component';
 import SimpleChartWidget from '../components/SimpleChartWidget/SimpleChart.component';
 import StockTickerWidget from '../components/StockTickerWidget/StockTickerWidget.component';
 import OrgChartWidget from '../components/OrgChartWidget/OrgChartWidget.component';
-
 import TextSetting from '../components/TextWidget/TextSetting.component';
 import TableSetting from '../components/TableWidget/TableSetting.component';
+import SimpleChartSetting from '../components/SimpleChartWidget/SimpleChartSetting.component';
 
 export const SYSTEM_COMPONENTS = {
     'TEXT_WIDGET': TextWidget,
@@ -20,8 +20,7 @@ export const SYSTEM_COMPONENTS = {
 export const SETTING_COMPONENTS = {
     'TEXT_WIDGET': TextSetting,
     'DATATABLE_WIDGET': TableSetting,
-    // 'TODOLIST_WIDGET': TodoWidget,
-    'SIMPLECHART_WIDGET': SimpleChartWidget,
+    'SIMPLECHART_WIDGET': SimpleChartSetting,
     'STOCK_TICKER_WIDGET': StockTickerWidget,
     'ORG_CHART_WIDGET': OrgChartWidget
 }
