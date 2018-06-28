@@ -1,45 +1,44 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { fetchDataSource } from '../../actions/dataSource.action'
-import OrgChart from '../../library/chart.bundle'
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchDataSource } from '../../actions/dataSource.action';
+import OrgChart from '../../library/chart.bundle';
 
-import '../../library/chart.css'
+import '../../library/chart.css';
 
 class OrgChartWidget extends React.PureComponent {
-    
-    renderOrgChart(){
-        const contacts = this.props.data["contacts"];
-        if(contacts && !this.chart){
-            this.chart = new OrgChart(contacts);
-            this.chart.initEmployeeTree('tree');
-        }
+  renderOrgChart() {
+    const contacts = this.props.data['contacts'];
+    if (contacts && !this.chart) {
+      this.chart = new OrgChart(contacts);
+      this.chart.initEmployeeTree('tree');
     }
+  }
 
-    componentWillMount(){
-        if(!this.props.data["contacts"]){
-            this.props.dispatch(fetchDataSource(this.props.configs.dataSource))
-        }
+  componentWillMount() {
+    if (!this.props.data['contacts']) {
+      this.props.dispatch(fetchDataSource(this.props.configs.dataSource));
     }
-    
-    componentWillUnmount(){
-        this.chart = null;
-    }
+  }
 
-    componentDidUpdate(){
-        this.renderOrgChart()
-    }
+  componentWillUnmount() {
+    this.chart = null;
+  }
 
-    componentDidMount(){
-        this.renderOrgChart()
-    }
+  componentDidUpdate() {
+    this.renderOrgChart();
+  }
 
-    render(){
-        return (<div id="tree" className="tree"></div>)
-    }
+  componentDidMount() {
+    this.renderOrgChart();
+  }
+
+  render() {
+    return <div id="tree" className="tree" />;
+  }
 }
 
 const mapStateToProps = state => ({
-    data: state.dataSource
-})
+  data: state.dataSource
+});
 
-export default connect(mapStateToProps)(OrgChartWidget)
+export default connect(mapStateToProps)(OrgChartWidget);

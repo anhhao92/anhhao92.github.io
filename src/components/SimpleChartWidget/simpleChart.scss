@@ -1,13 +1,13 @@
 .chart-type {
-    padding: 5px;
-    border: 1px solid #a5a5a5;
-    cursor: pointer;
+  padding: 5px;
+  border: 1px solid #a5a5a5;
+  cursor: pointer;
 
-    &.active {
-        background: #dedbdb;
-    }
+  &.active {
+    background: #dedbdb;
+  }
 }
 
 .chart-type + .chart-type {
-    border-left: 0;
+  border-left: 0;
 }

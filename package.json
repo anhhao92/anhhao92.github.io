@@ -58,5 +58,11 @@
   "devDependencies": {
     "gh-pages": "^1.2.0"
   },
+  "lint-staged": {
+      "src/**/*.{js,jsx,json,scss}": [
+        "prettier --single-quote --write",
+        "git add"
+      ]
+  },
   "homepage": "https://anhhao92.github.io"
 }
