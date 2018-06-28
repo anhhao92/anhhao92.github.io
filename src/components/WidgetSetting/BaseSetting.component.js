@@ -6,9 +6,9 @@ import './baseSetting.css'
 export default class BaseSetting extends React.PureComponent {
     render(){
         return (
-            <div className="container">
+            <div className="container-fluid">
                 <Label for="title">Widget Title</Label>
-                <Input type="email" name="email" id="title" placeholder="New Widget" autoComplete="off" defaultValue={this.props.title}/>
+                <Input type="text" id="title" placeholder="New Widget" autoComplete="off" defaultValue={this.props.title}/>
                 <div className="row">
                     <div className="col-4">
                         <Label>Widget type</Label>
@@ -23,11 +23,11 @@ export default class BaseSetting extends React.PureComponent {
                     </div>
                     <div className="col-4">
                         <Label for="minWidth">Min width</Label>
-                        <Input type="email" name="text" id="minWidth" defaultValue={this.props.maxWidth}/>
+                        <Input type="text" name="text" id="minWidth" defaultValue={this.props.maxWidth}/>
                     </div>
                         <div className="col-4">
                         <Label for="minHeight">Min height</Label>
-                        <Input type="email" name="text" id="minHeight" defaultValue={this.props.maxHeight}/>
+                        <Input type="text" name="text" id="minHeight" defaultValue={this.props.maxHeight}/>
                     </div>
                 </div>
                 <hr className="hr--custom" />

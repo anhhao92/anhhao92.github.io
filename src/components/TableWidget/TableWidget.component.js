@@ -3,39 +3,19 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { connect } from 'react-redux'
 import { fetchDataSource } from '../../actions/dataSource.action'
+import { getDataSource, getDisplayedColumns } from '../../selectors/dataTable.selectors'
 
 class TableWidget extends React.PureComponent {
 
-    getDataSource() {
-        const { data, configs } = this.props;
-        const dataType = configs.dataSource.toLowerCase();
-        const result = data && data[dataType];
-        return result ? result : false;
-    }
-
     componentWillMount(){
-        if(!this.getDataSource()){
-            this.props.dispatch(fetchDataSource(this.props.configs.dataSource))
+        const {data, configs, dispatch} = this.props;
+        if(!data){
+            dispatch(fetchDataSource(configs.dataSource))
         }
     }
 
     render(){
-        const data = this.getDataSource();
-        const displayColumns = [{
-            dataField: 'id',
-            text: 'ID',
-            headerStyle: { width: 40 }
-          }, {
-            dataField: 'employeeId',
-            text: 'Name',
-            formatter: (cell, row) => {
-                return `${row.firstName} ${row.lastName}`
-            }
-          }, {
-            dataField: 'title',
-            text: 'Title',
-            headerStyle: { width: '30%' }
-        }];
+        const { data, displayedColumns } = this.props;
         const paginationConf = {
             sizePerPage: 5,
             showTotal: true,
@@ -51,7 +31,7 @@ class TableWidget extends React.PureComponent {
         : <BootstrapTable 
             keyField='id' 
             data={data} 
-            columns={displayColumns} 
+            columns={displayedColumns} 
             pagination={paginationFactory(paginationConf)}
             bordered={false}
             striped
@@ -61,8 +41,9 @@ class TableWidget extends React.PureComponent {
     }
 }
 
-const mapStateToProps = state => ({
-    data: state.dataSource
+const mapStateToProps = (state, props) => ({
+    data: getDataSource(state, props),
+    displayedColumns: getDisplayedColumns(state, props)
 })
 
 export default connect(mapStateToProps)(TableWidget)

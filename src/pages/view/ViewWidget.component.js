@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { getWidgetState } from '../../selectors/viewSelector'
+import { getWidgetState } from '../../selectors/view.selectors'
 import { SYSTEM_COMPONENTS } from '../../constants';
 
 const ViewWidget = ({widget}) => {

@@ -1,0 +1,18 @@
+.columns {
+    border: 1px solid #ccc;
+    list-style-type: none;
+    padding: 0;
+    min-height: 50px;
+}
+
+.column-items {
+    margin: 10px;
+    outline: 2px dashed #b9b9b9;
+    padding-left: 10px;
+    background: #ececec;
+    list-style-type: none;
+
+    &:first-letter {
+        text-transform:capitalize;
+    }
+}

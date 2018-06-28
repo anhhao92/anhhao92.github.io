@@ -26,7 +26,5 @@ export const getVisibleTodos = () => createSelector(
 
 export const getTotalInCompletedTasks = () => createSelector (
     [ getTodos ],
-    (todos) => {
-        return todos.filter(t => !t.isCompleted).length;
-    }
+    (todos) => todos.filter(t => !t.isCompleted).length
 )
