@@ -3,6 +3,12 @@ import { Table } from 'reactstrap';
 import { FaArrowUp, FaArrowDown } from 'react-icons/lib/fa';
 import './stock.css';
 
+export const StockItem = ({ code }) => (
+  <span className="badge badge-info">
+    {code} <span className="stock-close">&times;</span>
+  </span>
+);
+
 export const StockTickerView = props => {
   return (
     <Table>

@@ -6,7 +6,7 @@ import {
   getVisibilityFilter,
   getVisibleTodos,
   getTotalInCompletedTasks
-} from '../../selectors/todoSelectors';
+} from '../../selectors/todo.selectors';
 
 class TodoWidget extends React.PureComponent {
   componentWillMount() {

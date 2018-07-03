@@ -13,3 +13,19 @@
   color: #fff;
   font-weight: 600;
 }
+
+.stock-close {
+  cursor: pointer;
+}
+
+.badge {
+  font-size: 16px;
+}
+
+.stock-container {
+  border: 1px dashed #b9b9b9;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 8px;
+}
