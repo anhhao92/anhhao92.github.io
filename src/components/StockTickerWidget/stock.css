@@ -16,11 +16,11 @@
   cursor: pointer; }
 
 .badge {
-  font-size: 16px; }
+  font-size: 16px;
+  margin: 2px 2px 2px; }
 
 .stock-container {
   border: 1px dashed #b9b9b9;
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
   padding: 8px; }

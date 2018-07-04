@@ -12,16 +12,15 @@ export const dashboard = (state = {}, action) => {
         layoutType: payload
       };
     case DashboardAction.UPDATE_CONFIG:
-      const widgets = {
-        ...state.widgets,
-        [payload.id]: {
-          ...state.widgets[payload.id],
-          configs: { ...payload.configs }
-        }
-      };
       return {
         ...state,
-        widgets: widgets
+        widgets: {
+          ...state.widgets,
+          [payload.id]: {
+            ...state.widgets[payload.id],
+            configs: { ...payload.configs }
+          }
+        }
       };
     case DashboardAction.DASHBOARD_SWITCH_MODE:
       return {

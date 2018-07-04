@@ -2,26 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchDataSource } from '../../actions/dataSource.action';
 import OrgChart from '../../library/chart.bundle';
-
 import '../../library/chart.css';
 
 class OrgChartWidget extends React.PureComponent {
   renderOrgChart() {
-    const contacts = this.props.data['contacts'];
-    if (contacts && !this.chart) {
-      this.chart = new OrgChart(contacts);
+    const { configs, contacts } = this.props;
+    if (contacts && configs.rootEmployeeId) {
+      this.chart = new OrgChart(contacts, configs.rootEmployeeId);
       this.chart.initEmployeeTree('tree');
     }
   }
 
   componentWillMount() {
-    if (!this.props.data['contacts']) {
+    if (!this.props.contacts) {
       this.props.dispatch(fetchDataSource(this.props.configs.dataSource));
     }
-  }
-
-  componentWillUnmount() {
-    this.chart = null;
   }
 
   componentDidUpdate() {
@@ -38,7 +33,7 @@ class OrgChartWidget extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  data: state.dataSource
+  contacts: state.dataSource.contacts
 });
 
 export default connect(mapStateToProps)(OrgChartWidget);

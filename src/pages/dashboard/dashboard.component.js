@@ -18,6 +18,7 @@ class Dashboard extends React.PureComponent {
   componentDidUpdate() {
     const { isEdit } = this.props.dashboard;
     if (isEdit) {
+      this.drake && this.drake.destroy();
       this.drake = dragula([document.getElementById('wrapper')], {
         direction: 'horizontal',
         moves: (el, container, handle) => {

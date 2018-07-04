@@ -3,9 +3,12 @@ import { Table } from 'reactstrap';
 import { FaArrowUp, FaArrowDown } from 'react-icons/lib/fa';
 import './stock.css';
 
-export const StockItem = ({ code }) => (
+export const StockItem = ({ stock, onRemove }) => (
   <span className="badge badge-info">
-    {code} <span className="stock-close">&times;</span>
+    {stock.code}{' '}
+    <span onClick={onRemove} className="stock-close">
+      &times;
+    </span>
   </span>
 );
 

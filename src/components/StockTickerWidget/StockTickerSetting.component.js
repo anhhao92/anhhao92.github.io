@@ -12,9 +12,21 @@ class StockTickerSetting extends React.PureComponent {
     };
   }
 
+  onRemove = e => {
+    const parent = document.querySelector('.stock-container');
+    parent.removeChild(e.target.parentNode);
+  };
+
   componentWillUnmount() {
-    const { dispatch, widgetId } = this.props;
-    // dispatch(DashboardActionCreator.updateConfig(widgetId, this.state));
+    const { dispatch, widgetId, configs } = this.props;
+    const stockElements = document.querySelectorAll('.stock-container .badge');
+    const selectedCodes = [];
+    stockElements.forEach(e => {
+      e.removeChild(e.querySelector('.stock-close'));
+      selectedCodes.push(e.textContent.trim());
+    });
+    configs.codes = selectedCodes;
+    dispatch(DashboardActionCreator.updateConfig(widgetId, configs));
   }
 
   render() {
@@ -23,11 +35,17 @@ class StockTickerSetting extends React.PureComponent {
         <div className="col-12">Stock Codes:</div>
         <div className="col-12">
           <div className="stock-container">
-            {this.state.codes.map((e, idx) => <StockItem key={idx} code={e} />)}
+            {this.props.stocks.map((item, idx) => (
+              <StockItem onRemove={this.onRemove} key={idx} stock={item} />
+            ))}
           </div>
         </div>
       </BaseSetting>
     );
   }
 }
-export default connect()(StockTickerSetting);
+
+const mapStateToProps = state => ({
+  stocks: state.stockTicker
+});
+export default connect(mapStateToProps)(StockTickerSetting);
