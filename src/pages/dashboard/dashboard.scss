@@ -1,49 +1,53 @@
-@import "~dragula/dist/dragula.css";
+@import '~dragula/dist/dragula.css';
 
 .dashboard {
-    &__title {
-        font-size: 20px;
-        font-weight: 600;
-        color: #1e5281;
-        border-bottom: 2px solid #1e5281;
-        padding: 10px 0;
-        display: flex;
-        justify-content: space-between;
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1e5281;
+    border-bottom: 2px solid #1e5281;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 20px;
+  }
+
+  &-container {
+    align-items: center;
+    display: flex;
+    flex: 0 0 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+  }
+
+  &-layout {
+    width: 180px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--active {
+      opacity: 0.5;
     }
 
-    &__body {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        padding-top: 20px;
+    svg {
+      cursor: pointer;
     }
-
-    &-container {
-        align-items: center;
-        display: flex;
-        flex: 0 0 100%;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        position: relative;
-        width: 100%;	
-    }
-
-    &-layout {
-        width: 180px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-       
-        &--active {
-            opacity: 0.5;
-        }
-
-        svg {
-            cursor: pointer;
-        }
-    }
+  }
 }
 
-#wrapper > div {
-    transition: all ease-in 0.5s;
+.wrapper > div {
+  transition: all ease-in 0.5s;
+}
+
+.wrapper {
+  margin-top: 30px;
 }

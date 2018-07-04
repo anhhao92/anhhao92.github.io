@@ -1,6 +1,6 @@
 .widget {
   border: 1px solid #ccc;
-  margin-top: 30px; }
+  margin-bottom: 30px; }
   .widget-content {
     overflow-x: hidden;
     overflow-y: auto;

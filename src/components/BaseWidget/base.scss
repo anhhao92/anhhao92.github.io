@@ -4,12 +4,11 @@ $header-color: #1e5281;
 
 .widget {
   border: 1px solid $color-ccc;
-  margin-top: 30px;
+  margin-bottom: 30px;
 
   &-content {
     overflow-x: hidden;
     overflow-y: auto;
-    // padding: 5px 5px 0 5px;
     position: relative;
     height: 320px;
   }
