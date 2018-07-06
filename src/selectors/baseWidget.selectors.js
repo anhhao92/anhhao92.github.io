@@ -7,12 +7,12 @@ const getConfigButtonSelector = props => {
 
 const getMaximizeButtonSelector = props => {
   const { isEditing, widgetType } = props;
-  return !isEditing && widgetType;
+  return !isEditing && widgetType !== 'DEFAULT_WIDGET';
 };
 
 const getRemoveButtonSelector = props => {
-  const { isEditDashboard, widgetType } = props;
-  return isEditDashboard && widgetType;
+  const { isEditDashboard, widgetType, isEditing } = props;
+  return isEditing || (isEditDashboard && widgetType !== 'DEFAULT_WIDGET');
 };
 
 export const getConfigButtonState = createSelector(

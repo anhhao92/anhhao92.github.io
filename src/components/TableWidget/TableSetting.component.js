@@ -1,5 +1,4 @@
 import React from 'react';
-import BaseSetting from '../WidgetSetting/BaseSetting.component';
 import dragula from 'dragula';
 import { connect } from 'react-redux';
 import { Input, Label } from 'reactstrap';
@@ -32,7 +31,7 @@ class TableSetting extends React.PureComponent {
   render() {
     const { availableColumns, configs } = this.props;
     return (
-      <BaseSetting {...this.props}>
+      <div className="row">
         <div className="col-6">
           <Label for="title">Data source</Label>
           <Input type="select" name="select">
@@ -55,16 +54,17 @@ class TableSetting extends React.PureComponent {
             <div className="col-6">
               <Label>Selected Columns:</Label>
               <ul id="right-side" className="columns">
-                {configs.selectedColumns.map(col => (
-                  <li key={col} className="column-items">
-                    {col}
-                  </li>
-                ))}
+                {configs.selectedColumns &&
+                  configs.selectedColumns.map(col => (
+                    <li key={col} className="column-items">
+                      {col}
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
         </div>
-      </BaseSetting>
+      </div>
     );
   }
 }

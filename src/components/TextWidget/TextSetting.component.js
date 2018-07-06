@@ -1,5 +1,4 @@
 import React from 'react';
-import BaseSetting from '../WidgetSetting/BaseSetting.component';
 import { connect } from 'react-redux';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
@@ -26,20 +25,22 @@ class TextSetting extends React.PureComponent {
   componentWillUnmount() {
     const { dispatch, widgetId } = this.props;
     const rawContent = convertToRaw(this.state.editorState.getCurrentContent());
+
     dispatch(DashboardActionCreator.updateConfig(widgetId, { rawContent }));
   }
 
   render() {
     return (
-      <BaseSetting {...this.props}>
+      <div className="row">
         <Editor
           editorState={this.state.editorState}
           wrapperClassName="text-wrapper"
           editorClassName="text-editor"
           onEditorStateChange={this.onEditorStateChange}
         />
-      </BaseSetting>
+      </div>
     );
   }
 }
+
 export default connect()(TextSetting);

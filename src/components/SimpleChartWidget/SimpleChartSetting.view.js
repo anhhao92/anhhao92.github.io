@@ -1,12 +1,11 @@
 import React from 'react';
-import BaseSetting from '../WidgetSetting/BaseSetting.component';
 import { Input, Label } from 'reactstrap';
 import { FaPieChart, FaLineChart, FaBarChart } from 'react-icons/lib/fa';
 import './simpleChart.css';
 
 export const SimpleChartSettingView = props => {
   return (
-    <BaseSetting {...props}>
+    <div className="row">
       <div className="col-12 d-flex justify-content-center">
         <span
           onClick={props.setChartType('pie')}
@@ -70,6 +69,6 @@ export const SimpleChartSettingView = props => {
           </div>
         </div>
       </div>
-    </BaseSetting>
+    </div>
   );
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import BaseSetting from '../WidgetSetting/BaseSetting.component';
 import { connect } from 'react-redux';
 import { DashboardActionCreator } from '../../actions/dashboard.action';
 import { StockItem } from './StockTicker.view';
@@ -31,7 +30,7 @@ class StockTickerSetting extends React.PureComponent {
 
   render() {
     return (
-      <BaseSetting {...this.props}>
+      <div className="row">
         <div className="col-12">Stock Codes:</div>
         <div className="col-12">
           <div className="stock-container">
@@ -40,7 +39,7 @@ class StockTickerSetting extends React.PureComponent {
             ))}
           </div>
         </div>
-      </BaseSetting>
+      </div>
     );
   }
 }

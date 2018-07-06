@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { DashboardView } from './dashboard.view';
 import { LAYOUT_TYPES, LAYOUT_STYLES } from '../../constants/LayoutType';
 import { DashboardActionCreator } from '../../actions/dashboard.action';
-import { getNumberOfPlaceHolder } from '../../selectors/dashboard.selectors';
 class Dashboard extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -56,19 +55,18 @@ class Dashboard extends React.PureComponent {
   }
 
   render() {
+    console.log(this.props.dashboard);
     return (
       <DashboardView
         dashboard={this.props.dashboard}
         onChangeLayout={this.onChangeLayout}
-        totalPlaceHolder={this.props.totalPlaceHolder}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  dashboard: state.dashboard,
-  totalPlaceHolder: getNumberOfPlaceHolder(state)
+  dashboard: state.dashboard
 });
 
 export default connect(mapStateToProps)(Dashboard);

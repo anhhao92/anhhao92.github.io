@@ -13,11 +13,10 @@ import './base.css';
 class BaseWidget extends React.PureComponent {
   onClickSetting = () => {
     const { dispatch, widgetId, widgetType } = this.props;
-    if (widgetType === 'TODOLIST_WIDGET') {
-      alert('No setting for this type');
+    if (!widgetType) {
       return;
     }
-    dispatch(DashboardActionCreator.switchWidgetToSettingMode(widgetId));
+    dispatch(DashboardActionCreator.goToSetting(widgetId));
   };
 
   onDelete = () => {
@@ -25,10 +24,10 @@ class BaseWidget extends React.PureComponent {
     dispatch(DashboardActionCreator.deleteWidget(widgetId));
   };
 
-  saveAndClose = () => {
-    const { dispatch, widgetId } = this.props;
-    dispatch(DashboardActionCreator.switchWidgetToSettingMode(widgetId, false));
-  };
+  // saveAndClose = () => {
+  //   const { dispatch, widgetId } = this.props;
+  //   dispatch(DashboardActionCreator.goToSetting(widgetId, false));
+  // };
 
   render() {
     const {
@@ -37,7 +36,6 @@ class BaseWidget extends React.PureComponent {
       isSetting,
       isDeleted,
       isMaximized,
-      isEditing,
       children
     } = this.props;
     return (
@@ -52,11 +50,7 @@ class BaseWidget extends React.PureComponent {
                   <FaArrowsAlt />
                 </Link>
               )}
-              {isDeleted && (
-                <FaClose
-                  onClick={isEditing ? this.saveAndClose : this.onDelete}
-                />
-              )}
+              {isDeleted && <FaClose onClick={this.onDelete} />}
             </div>
           </div>
           <div className="widget-content">{children}</div>

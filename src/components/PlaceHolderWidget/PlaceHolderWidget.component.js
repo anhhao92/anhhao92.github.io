@@ -1,12 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { PlaceHolderWidgetView } from './PlaceHolderWidget.view';
 import { DashboardActionCreator } from '../../actions/dashboard.action';
+import { FaPlus } from 'react-icons/lib/fa';
+import './placeHolder.css';
 
-export default class PlaceHolderWidget extends React.PureComponent {
+class PlaceHolderWidget extends React.PureComponent {
+  onClick = () => {
+    const { dispatch, widgetId } = this.props;
+    dispatch(DashboardActionCreator.goToSetting(widgetId));
+  };
+
   render() {
-    return <PlaceHolderWidgetView />;
+    return (
+      <div onClick={this.onClick} className="add-content">
+        <FaPlus size={100} />{' '}
+      </div>
+    );
   }
 }
 
-// export default connect()(PlaceHolderWidget);
+export default connect()(PlaceHolderWidget);

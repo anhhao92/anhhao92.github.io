@@ -1,28 +1,74 @@
 import React from 'react';
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { Input, Label } from 'reactstrap';
+import { DashboardActionCreator } from '../../actions/dashboard.action';
+import { SETTING_COMPONENTS } from '../../constants';
 import './baseSetting.css';
 
-export default class BaseSetting extends React.PureComponent {
+class BaseSetting extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      widgetType: this.props.widgetType,
+      title: this.props.title,
+      maxWidth: this.props.maxWidth,
+      maxHeight: this.props.maxHeight
+    };
+  }
+
+  onChange = e => {
+    this.setState({
+      widgetType: e.target.value
+    });
+  };
+
+  updateTitle = e => {
+    this.setState({
+      title: e.target.value
+    });
+  };
+
+  updateWidth = e => {
+    this.setState({
+      maxWidth: e.target.value
+    });
+  };
+
+  updateHeight = e => {
+    this.setState({
+      maxHeight: e.target.value
+    });
+  };
+
+  componentWillUnmount() {
+    const { dispatch, widgetId } = this.props;
+    dispatch(
+      DashboardActionCreator.updateWidgetInfo({ widgetId, ...this.state })
+    );
+  }
+
   render() {
+    const SettingComponent = SETTING_COMPONENTS[this.state.widgetType];
     return (
       <div className="container-fluid">
         <Label for="title">Widget Title</Label>
         <Input
           type="text"
-          id="title"
-          placeholder="New Widget"
           autoComplete="off"
-          defaultValue={this.props.title}
+          onChange={this.updateTitle}
+          value={this.state.title}
         />
         <div className="row">
           <div className="col-4">
             <Label>Widget type</Label>
             <Input
-              type="select"
-              name="select"
+              onChange={this.onChange}
               defaultValue={this.props.widgetType}
+              type="select"
             >
+              <option disabled value="DEFAULT_WIDGET">
+                Select
+              </option>
               <option value="TEXT_WIDGET">Text</option>
               <option value="DATATABLE_WIDGET">Datatable</option>
               <option value="TODOLIST_WIDGET">Todo List</option>
@@ -35,24 +81,24 @@ export default class BaseSetting extends React.PureComponent {
             <Label for="minWidth">Min width</Label>
             <Input
               type="text"
-              name="text"
-              id="minWidth"
-              defaultValue={this.props.maxWidth}
+              onChange={this.updateWidth}
+              value={this.state.maxWidth}
             />
           </div>
           <div className="col-4">
             <Label for="minHeight">Min height</Label>
             <Input
               type="text"
-              name="text"
-              id="minHeight"
-              defaultValue={this.props.maxHeight}
+              onChange={this.updateHeight}
+              value={this.state.maxHeight}
             />
           </div>
         </div>
         <hr className="hr--custom" />
-        <div className="row">{this.props.children}</div>
+        {SettingComponent && <SettingComponent {...this.props} />}
       </div>
     );
   }
 }
+
+export default connect()(BaseSetting);
