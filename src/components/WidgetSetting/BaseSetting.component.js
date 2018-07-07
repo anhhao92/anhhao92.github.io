@@ -10,7 +10,7 @@ class BaseSetting extends React.PureComponent {
     super(props);
     this.state = {
       widgetType: this.props.widgetType,
-      title: this.props.title,
+      title: 'New Widget',
       maxWidth: this.props.maxWidth,
       maxHeight: this.props.maxHeight
     };

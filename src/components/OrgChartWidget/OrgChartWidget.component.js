@@ -28,8 +28,13 @@ class OrgChartWidget extends React.PureComponent {
   }
 
   render() {
-    const { widgetId } = this.props;
-    return <div id={'tree_' + widgetId} className="tree" />;
+    const { widgetId, isScale } = this.props;
+    return (
+      <div
+        id={'tree_' + widgetId}
+        className={isScale ? 'no-scale tree' : 'scale tree'}
+      />
+    );
   }
 }
 

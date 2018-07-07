@@ -1,17 +1,15 @@
-.xs-scale {
+.scale {
   transform: scale(0.21, 0.21);
   transform-origin: 0 0;
 }
 
-.lg-scale {
-  transform: scale(0.71, 0.71);
-  transform-origin: 0 0;
+.no-scale {
+  height: 100vh;
+  overflow: auto;
 }
 
 .tree {
   width: auto;
-  transform: scale(0.21, 0.21);
-  transform-origin: 0 0;
 }
 .tree ul {
   padding-left: 0;
