@@ -11,7 +11,8 @@ export const dashboard = (state = {}, action) => {
     case DashboardAction.CHANGE_LAYOUT:
       return {
         ...state,
-        layoutType: payload
+        layoutType: payload,
+        widgets: recalculateSampleWidget(state.widgets, payload)
       };
     case DashboardAction.UPDATE_CONFIG:
       return {
@@ -28,8 +29,8 @@ export const dashboard = (state = {}, action) => {
       };
     case DashboardAction.EDIT_DASHBOARD:
       let widgets = payload
-        ? createSampleWidget(state)
-        : removeSampleWidget(state);
+        ? createSampleWidget(state.widgets, state.layoutType)
+        : removeSampleWidget(state.widgets);
       if (!payload) {
         widgets = widgets.map(m => {
           return {
@@ -44,43 +45,38 @@ export const dashboard = (state = {}, action) => {
         widgets: widgets
       };
     case DashboardAction.DELETE_WIDGET:
+      const newWidgets = state.widgets.filter(m => m.widgetId !== payload);
       return {
         ...state,
-        widgets: state.widgets.filter(m => m.widgetId !== payload)
+        widgets: recalculateSampleWidget(newWidgets, state.layoutType)
       };
-    case DashboardAction.SWITCH_WIDGET_TO_SETTING:
+    case DashboardAction.WIDGET_SETTING:
+      const currentWidgets = state.widgets.map(m => {
+        if (m.widgetId === payload.id) {
+          m.isEditing = payload.isEditing;
+        }
+        return m;
+      });
       return {
         ...state,
-        widgets: state.widgets.map(m => {
-          if (m.widgetId === payload.id) {
-            m.isEditing = payload.isEditing;
-          }
-          return m;
-        })
+        widgets: shouldInsertMoreSampleWidget(currentWidgets, state.layoutType)
       };
     case DashboardAction.UPDATE_COMMON_INFO:
       return {
         ...state,
-        widgets: updateWidgetSetting(state.widgets, payload)
+        widgets: state.widgets.map(
+          widget =>
+            widget.widgetId === payload.widgetId
+              ? { ...widget, ...payload }
+              : widget
+        )
       };
     default:
       return state;
   }
 };
 
-const updateWidgetSetting = (widgets, payload) => {
-  console.log('Unmount goi', payload);
-  return payload.widgetType === COMPONENTS.DEFAULT_WIDGET
-    ? widgets.filter(m => m.widgetType !== COMPONENTS.DEFAULT_WIDGET)
-    : widgets.map(
-        widget =>
-          widget.widgetId === payload.widgetId
-            ? { ...widget, ...payload }
-            : widget
-      );
-};
-
-const getNumberOfPlaceHolder = (total, type) => {
+const getNumberOfSampleWidgets = (total, type) => {
   switch (type) {
     case LAYOUT_TYPES.A_COLUMN:
       return 1;
@@ -97,12 +93,10 @@ const getNumberOfPlaceHolder = (total, type) => {
       return 1;
   }
 };
-const createSampleWidget = dashboard => {
+
+const createSampleWidget = (widgets, layoutType) => {
   const result = [];
-  const total = getNumberOfPlaceHolder(
-    dashboard.widgets.length,
-    dashboard.layoutType
-  );
+  const total = getNumberOfSampleWidgets(widgets.length, layoutType);
   for (let i = 0; i < total; i++) {
     result.push({
       configs: {},
@@ -113,11 +107,28 @@ const createSampleWidget = dashboard => {
       widgetType: COMPONENTS.DEFAULT_WIDGET
     });
   }
-  return dashboard.widgets.concat(result);
+  return widgets.concat(result);
 };
 
-const removeSampleWidget = dashboard => {
-  return dashboard.widgets.filter(
+const removeSampleWidget = widgets => {
+  return widgets.filter(
     m => m.widgetType !== COMPONENTS.DEFAULT_WIDGET || m.isEditing
   );
+};
+
+const recalculateSampleWidget = (widgets, layoutType) => {
+  widgets = widgets.filter(
+    m => m.widgetType !== COMPONENTS.DEFAULT_WIDGET || m.isEditing
+  );
+  return createSampleWidget(widgets, layoutType);
+};
+
+const shouldInsertMoreSampleWidget = (widgets, layoutType) => {
+  const remainingSampleWdgets = widgets.filter(
+    m => m.widgetType === COMPONENTS.DEFAULT_WIDGET && !m.isEditing
+  );
+  if (remainingSampleWdgets.length === 0) {
+    return createSampleWidget(widgets, layoutType);
+  }
+  return widgets;
 };

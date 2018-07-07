@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { DashboardView } from './dashboard.view';
 import { LAYOUT_TYPES, LAYOUT_STYLES } from '../../constants/LayoutType';
 import { DashboardActionCreator } from '../../actions/dashboard.action';
+
 class Dashboard extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -28,6 +29,7 @@ class Dashboard extends React.PureComponent {
       this.drake && this.drake.destroy();
       this.drake = null;
     }
+    this.updateLayout(this.props.dashboard.layoutType);
   }
 
   componentWillUnmount() {
@@ -49,13 +51,12 @@ class Dashboard extends React.PureComponent {
     });
   }
 
-  onChangeLayout(type) {
+  onChangeLayout = type => () => {
     this.updateLayout(type);
     this.props.dispatch(DashboardActionCreator.changeLayout(type));
-  }
+  };
 
   render() {
-    console.log(this.props.dashboard);
     return (
       <DashboardView
         dashboard={this.props.dashboard}

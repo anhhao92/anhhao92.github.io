@@ -4,7 +4,7 @@ export const DashboardAction = {
   EDIT_DASHBOARD: 'EDIT_DASHBOARD',
   UPDATE_CONFIG: 'UPDATE_CONFIG',
   DELETE_WIDGET: 'DELETE_WIDGET',
-  SWITCH_WIDGET_TO_SETTING: 'SWITCH_WIDGET_TO_SETTING',
+  WIDGET_SETTING: 'WIDGET_SETTING',
   UPDATE_COMMON_INFO: 'UPDATE_COMMON_INFO'
 };
 
@@ -30,7 +30,7 @@ export const DashboardActionCreator = {
     payload: id
   }),
   goToSetting: (id, isEditing = true) => ({
-    type: DashboardAction.SWITCH_WIDGET_TO_SETTING,
+    type: DashboardAction.WIDGET_SETTING,
     payload: { isEditing, id }
   }),
   updateWidgetInfo: payload => ({

@@ -6,10 +6,10 @@ import '../../library/chart.css';
 
 class OrgChartWidget extends React.PureComponent {
   renderOrgChart() {
-    const { configs, contacts } = this.props;
+    const { configs, contacts, widgetId } = this.props;
     if (contacts && configs.rootEmployeeId) {
       this.chart = new OrgChart(contacts, configs.rootEmployeeId);
-      this.chart.initEmployeeTree('tree');
+      this.chart.initEmployeeTree('tree_' + widgetId);
     }
   }
 
@@ -28,7 +28,8 @@ class OrgChartWidget extends React.PureComponent {
   }
 
   render() {
-    return <div id="tree" className="tree" />;
+    const { widgetId } = this.props;
+    return <div id={'tree_' + widgetId} className="tree" />;
   }
 }
 
