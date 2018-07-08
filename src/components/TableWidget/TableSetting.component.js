@@ -7,6 +7,19 @@ import { DashboardActionCreator } from '../../actions/dashboard.action';
 import './tableSetting.css';
 
 class TableSetting extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource: this.props.configs.dataSource || 'contacts'
+    };
+  }
+
+  setDataSource = e => {
+    this.setState({
+      dataSource: e.target.value
+    });
+  };
+
   componentDidMount() {
     this.drake = dragula([
       document.getElementById('left-side'),
@@ -34,9 +47,13 @@ class TableSetting extends React.PureComponent {
       <div className="row">
         <div className="col-6">
           <Label for="title">Data source</Label>
-          <Input type="select" name="select">
+          <Input
+            type="select"
+            defaultValue={this.state.dataSource}
+            onChange={this.setDataSource}
+          >
             <option value="contacts">Contacts</option>
-            <option value="accounts">Users</option>
+            <option value="accounts">Accounts</option>
           </Input>
         </div>
         <div className="col-12">

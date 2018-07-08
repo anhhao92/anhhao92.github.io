@@ -44,19 +44,17 @@ export const SimpleChartSettingView = props => {
             <Label>Data source</Label>
             <Input
               type="select"
-              name="select"
-              defaultValue={props.dataSource}
+              defaultValue={props.configs.dataSource}
               onChange={props.setDataSource}
             >
               <option value="contacts">Contacts</option>
-              <option value="accounts">Users</option>
+              <option value="accounts">Accounts</option>
             </Input>
           </div>
           <div className="col-6">
             <Label>Group by</Label>
             <Input
               type="select"
-              name="select"
               defaultValue={props.configs.groupBy}
               onChange={props.setGroupByProperty}
             >

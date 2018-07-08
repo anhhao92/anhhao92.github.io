@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
-import { dashboard } from './dashboard.reducer'
-import { dataSource } from './dataSource.reducer'
-import { todos } from './todo.reducer'
-import { dataReport } from './simpleChart.reducer'
-import { stockTicker } from './stockTicker.reducer'
-import { modalSetting } from './modalSetting.reducer'
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
+import { dashboard } from './dashboard.reducer';
+import { dataSource } from './dataSource.reducer';
+import { todos } from './todo.reducer';
+import { dataReport } from './simpleChart.reducer';
+import { stockTicker } from './stockTicker.reducer';
+import { auth } from './authentication.reducer';
 
 export default combineReducers({
   routing: routerReducer,
@@ -14,5 +14,5 @@ export default combineReducers({
   todos,
   dataReport,
   stockTicker,
-  modalSetting
-})
+  auth
+});

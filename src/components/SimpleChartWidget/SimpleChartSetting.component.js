@@ -5,28 +5,46 @@ import { getAllFieldsFromDataSource } from '../../selectors/simpleChart.selector
 import { SimpleChartSettingView } from './SimpleChartSetting.view';
 
 class SimpleChartSetting extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      chartType: this.props.configs.chartType || 'pie',
+      dataSource: this.props.configs.dataSource || 'contacts',
+      groupBy: this.props.configs.groupBy || 'title'
+    };
+  }
+
   setChartType = type => () => {
-    const { dispatch, widgetId, configs } = this.props;
-    configs.chartType = type;
-    dispatch(DashboardActionCreator.updateConfig(widgetId, configs));
+    this.setState({
+      chartType: type
+    });
   };
 
   setDataSource = e => {
-    const { dispatch, widgetId, configs } = this.props;
-    configs.dataSource = e.target.value;
-    dispatch(DashboardActionCreator.updateConfig(widgetId, configs));
+    this.setState({
+      dataSource: e.target.value
+    });
   };
 
   setGroupByProperty = e => {
-    const { dispatch, widgetId, configs } = this.props;
-    configs.groupBy = e.target.value;
-    dispatch(DashboardActionCreator.updateConfig(widgetId, configs));
+    this.setState({
+      groupBy: e.target.value
+    });
   };
 
+  componentWillUnmount() {
+    const { dispatch, widgetId } = this.props;
+    dispatch(DashboardActionCreator.updateConfig(widgetId, this.state));
+  }
+
   render() {
+    const mergedProps = {
+      ...this.props,
+      configs: this.state
+    };
     return (
       <SimpleChartSettingView
-        {...this.props}
+        {...mergedProps}
         setChartType={this.setChartType}
         setDataSource={this.setDataSource}
         setGroupByProperty={this.setGroupByProperty}

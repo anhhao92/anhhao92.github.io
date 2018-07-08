@@ -6,7 +6,7 @@ import Highcharts from 'highcharts';
 
 class SimpleChartWidget extends React.PureComponent {
   renderChart() {
-    const { configs } = this.props;
+    const { configs, widgetId, dataReport } = this.props;
     const chartOptions = {
       chart: {
         type: configs.chartType,
@@ -23,11 +23,11 @@ class SimpleChartWidget extends React.PureComponent {
       series: [
         {
           name: 'Total',
-          data: this.props.dataReport
+          data: dataReport
         }
       ]
     };
-    this.highChart = Highcharts.chart('container', chartOptions);
+    this.highChart = Highcharts.chart(`container_${widgetId}`, chartOptions);
   }
 
   componentWillMount() {
@@ -54,7 +54,8 @@ class SimpleChartWidget extends React.PureComponent {
   }
 
   render() {
-    return <div id="container" className="d-block mx-auto" />;
+    const { widgetId } = this.props;
+    return <div id={`container_${widgetId}`} className="d-block mx-auto" />;
   }
 }
 const mapStateToProps = (state, props) => ({

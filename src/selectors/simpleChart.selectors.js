@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 const getFirstSampleData = (state, props) => {
   const data = state.dataSource;
-  const dataType = props.configs.dataSource;
+  const dataType = props.configs.dataSource || 'contacts';
   const sampleData = data && data[dataType];
   return sampleData ? sampleData[0] : {};
 };
