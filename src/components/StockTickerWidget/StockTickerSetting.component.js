@@ -45,6 +45,6 @@ class StockTickerSetting extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  stocks: state.stockTicker
+  stocks: state.stockTicker.stocks
 });
 export default connect(mapStateToProps)(StockTickerSetting);

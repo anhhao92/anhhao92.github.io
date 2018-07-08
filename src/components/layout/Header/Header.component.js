@@ -18,7 +18,7 @@ import { Authentication } from '../../../actions/auth.action';
 
 class Header extends React.PureComponent {
   onClickView = () => {
-    const { dispatch, dashboard } = this.props;
+    const { dispatch } = this.props;
     dispatch(DashboardActionCreator.switchMode(false));
   };
 

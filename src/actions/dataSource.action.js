@@ -23,7 +23,10 @@ export const fetchDataSource = type => {
           meta: dataType
         },
         'FAILED'
-      ]
+      ],
+      bailout: state => {
+        return state.dataSource[dataType] === undefined ? false : true;
+      }
     }
   };
 };

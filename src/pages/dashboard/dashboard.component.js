@@ -5,7 +5,6 @@ import { DashboardView } from './dashboard.view';
 import { LAYOUT_TYPES, LAYOUT_STYLES } from '../../constants/LayoutType';
 import {
   DashboardActionCreator,
-  saveDashboard,
   fetchDashboard
 } from '../../actions/dashboard.action';
 

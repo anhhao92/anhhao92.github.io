@@ -16,21 +16,6 @@ export const SimpleChartActionCreator = {
 export const fetchDataReport = (source, field) => {
   const dataType = source.toLowerCase();
   const dataField = field.toLowerCase();
-  // fetch(`/api/reports/_countby/${dataType}/${dataField}`)
-  //   .then(res => res && res.json())
-  //   .then(
-  //     data => {
-  //       const result = Object.keys(data).map(key => ({
-  //         name: key,
-  //         y: data[key]
-  //       }));
-  //       dispatch(
-  //         SimpleChartActionCreator.fetchDataReport(dataField, dataType, result)
-  //       );
-  //     },
-  //     error => console.log(error)
-  //   );
-
   return {
     [CALL_API]: {
       endpoint: `/api/reports/_countby/${dataType}/${dataField}`,

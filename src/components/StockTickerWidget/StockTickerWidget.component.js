@@ -1,22 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  fetchInitStock,
-  disconnectWebSocker
-} from '../../actions/stockTicker.action';
+import { fetchInitStock } from '../../actions/stockTicker.action';
 import { StockTickerView } from './StockTicker.view';
+import { getStocksTickerState } from '../../selectors/stocks.selectors';
 
 class StockTickerWidget extends React.PureComponent {
   componentWillMount() {
-    const { stocks, dispatch } = this.props;
-    if (!stocks.length) {
-      dispatch(fetchInitStock());
-    }
-  }
-
-  // Disconnect ws
-  componentWillUnmount() {
-    //disconnectWebSocker();
+    const { dispatch } = this.props;
+    dispatch(fetchInitStock());
   }
 
   render() {
@@ -25,12 +16,7 @@ class StockTickerWidget extends React.PureComponent {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  stocks: getVisibleStocks(state.stockTicker, ownProps)
+  stocks: getStocksTickerState(state, ownProps)
 });
-
-const getVisibleStocks = (stocks, props) => {
-  const visibleStocks = props.configs.codes;
-  return stocks.filter(stock => visibleStocks.includes(stock.code));
-};
 
 export default connect(mapStateToProps)(StockTickerWidget);

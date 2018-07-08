@@ -59,7 +59,10 @@ export const fetchToDoList = widgetId => {
           meta: widgetId
         },
         'FAILED'
-      ]
+      ],
+      bailout: state => {
+        return Object.keys(state.todos).length === 0 ? false : true;
+      }
     }
   };
 };
