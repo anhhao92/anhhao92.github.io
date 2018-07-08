@@ -6,7 +6,8 @@ export const dashboard = (state = {}, action) => {
   switch (type) {
     case DashboardAction.DASHBOARD_CREATION:
       return {
-        ...state
+        ...state,
+        ...payload
       };
     case DashboardAction.CHANGE_LAYOUT:
       return {

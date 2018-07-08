@@ -10,8 +10,10 @@ import {
 
 class TodoWidget extends React.PureComponent {
   componentWillMount() {
-    const { fetchToDoList, widgetId } = this.props;
-    fetchToDoList(widgetId);
+    const { fetchToDoList, widgetId, todos } = this.props;
+    if (!todos.length) {
+      fetchToDoList(widgetId);
+    }
   }
 
   onEnterPress = e => {

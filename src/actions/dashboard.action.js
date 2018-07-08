@@ -1,3 +1,5 @@
+import { CALL_API } from 'redux-api-middleware';
+
 export const DashboardAction = {
   DASHBOARD_CREATION: 'DASHBOARD_CREATION',
   CHANGE_LAYOUT: 'CHANGE_LAYOUT',
@@ -37,4 +39,27 @@ export const DashboardActionCreator = {
     type: DashboardAction.UPDATE_COMMON_INFO,
     payload
   })
+};
+
+export const saveDashboard = dashboard => {
+  return {
+    [CALL_API]: {
+      endpoint: `/api/dashboards/${dashboard.id}`,
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dashboard),
+      types: ['REQUEST', 'SUCCESS', 'FAILED']
+    }
+  };
+};
+
+export const fetchDashboard = () => {
+  return {
+    [CALL_API]: {
+      endpoint: '/api/dashboards/20',
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      types: ['REQUEST', 'DASHBOARD_CREATION', 'FAILED']
+    }
+  };
 };

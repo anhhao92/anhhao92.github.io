@@ -1,3 +1,5 @@
+import { CALL_API } from 'redux-api-middleware';
+
 export const SimpleChartAction = {
   FETCH_REPORT: 'FETCH_REPORT'
 };
@@ -11,21 +13,37 @@ export const SimpleChartActionCreator = {
   }
 };
 
-export const fetchDataReport = (source, field) => dispatch => {
+export const fetchDataReport = (source, field) => {
   const dataType = source.toLowerCase();
   const dataField = field.toLowerCase();
-  fetch(`/api/reports/_countby/${dataType}/${dataField}`)
-    .then(res => res && res.json())
-    .then(
-      data => {
-        const result = Object.keys(data).map(key => ({
-          name: key,
-          y: data[key]
-        }));
-        dispatch(
-          SimpleChartActionCreator.fetchDataReport(dataField, dataType, result)
-        );
-      },
-      error => console.log(error)
-    );
+  // fetch(`/api/reports/_countby/${dataType}/${dataField}`)
+  //   .then(res => res && res.json())
+  //   .then(
+  //     data => {
+  //       const result = Object.keys(data).map(key => ({
+  //         name: key,
+  //         y: data[key]
+  //       }));
+  //       dispatch(
+  //         SimpleChartActionCreator.fetchDataReport(dataField, dataType, result)
+  //       );
+  //     },
+  //     error => console.log(error)
+  //   );
+
+  return {
+    [CALL_API]: {
+      endpoint: `/api/reports/_countby/${dataType}/${dataField}`,
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      types: [
+        'REQUEST',
+        {
+          type: 'FETCH_REPORT',
+          meta: { dataType, dataField }
+        },
+        'FAILED'
+      ]
+    }
+  };
 };

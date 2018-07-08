@@ -15,7 +15,7 @@ class OrgChartWidget extends React.PureComponent {
 
   componentWillMount() {
     if (!this.props.contacts) {
-      this.props.dispatch(fetchDataSource(this.props.configs.dataSource));
+      this.props.dispatch(fetchDataSource());
     }
   }
 

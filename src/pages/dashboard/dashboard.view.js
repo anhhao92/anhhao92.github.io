@@ -50,21 +50,23 @@ const LayoutControls = ({ layoutType, onChangeLayout }) => (
 );
 
 export const DashboardView = ({ dashboard, onChangeLayout }) => {
-  const widgets = dashboard.widgets.map(props => {
-    const WidgetComponent = props.isEditing
-      ? BaseSetting
-      : SYSTEM_COMPONENTS[props.widgetType];
+  const widgets =
+    dashboard.widgets &&
+    dashboard.widgets.map(props => {
+      const WidgetComponent = props.isEditing
+        ? BaseSetting
+        : SYSTEM_COMPONENTS[props.widgetType];
 
-    return (
-      <BaseWidget
-        key={props.widgetId}
-        isEditDashboard={dashboard.isEdit}
-        {...props}
-      >
-        <WidgetComponent {...props} />
-      </BaseWidget>
-    );
-  });
+      return (
+        <BaseWidget
+          key={props.widgetId}
+          isEditDashboard={dashboard.isEdit}
+          {...props}
+        >
+          <WidgetComponent {...props} />
+        </BaseWidget>
+      );
+    });
 
   return (
     <div className="container-fluid">

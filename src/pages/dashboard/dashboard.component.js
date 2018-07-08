@@ -3,12 +3,23 @@ import dragula from 'dragula';
 import { connect } from 'react-redux';
 import { DashboardView } from './dashboard.view';
 import { LAYOUT_TYPES, LAYOUT_STYLES } from '../../constants/LayoutType';
-import { DashboardActionCreator } from '../../actions/dashboard.action';
+import {
+  DashboardActionCreator,
+  saveDashboard,
+  fetchDashboard
+} from '../../actions/dashboard.action';
 
 class Dashboard extends React.PureComponent {
   constructor(props) {
     super(props);
     this.onChangeLayout = this.onChangeLayout.bind(this);
+  }
+
+  componentWillMount() {
+    const { dispatch, dashboard } = this.props;
+    if (!dashboard.id) {
+      dispatch(fetchDashboard());
+    }
   }
 
   componentDidMount() {
