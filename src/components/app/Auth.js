@@ -1,12 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { Authentication } from '../../actions/auth.action';
 export const withAuth = WrappedComponent => {
-  class Authentication extends React.PureComponent {
+  class AuthenticationHook extends React.PureComponent {
     componentWillUpdate(nextProps) {
-      const { history } = this.props;
+      const { history, location, dispatch } = this.props;
       if (!nextProps.isAuthenticated) {
+        dispatch(Authentication.returnUrl(location.pathname));
         history.push('/login');
       }
     }
@@ -22,5 +23,5 @@ export const withAuth = WrappedComponent => {
   const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
   });
-  return withRouter(connect(mapStateToProps)(Authentication));
+  return withRouter(connect(mapStateToProps)(AuthenticationHook));
 };

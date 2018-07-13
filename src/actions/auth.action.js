@@ -4,7 +4,8 @@ export const AuthenticationAction = {
   LOGIN_REQUEST: 'LOGIN_REQUEST',
   LOGIN_SUCCEED: 'LOGIN_SUCCEED',
   LOGIN_FAILED: 'LOGIN_FAILED',
-  LOGOUT_REQUEST: 'LOGOUT_REQUEST'
+  LOGOUT_REQUEST: 'LOGOUT_REQUEST',
+  SAVE_RETURN_URL: 'SAVE_RETURN_URL'
 };
 
 export const Authentication = {
@@ -22,6 +23,10 @@ export const Authentication = {
   }),
   logoutUser: () => ({
     type: AuthenticationAction.LOGOUT_REQUEST
+  }),
+  returnUrl: url => ({
+    type: AuthenticationAction.SAVE_RETURN_URL,
+    payload: url
   })
 };
 
@@ -40,8 +45,6 @@ export const loginUser = (user, history) => dispatch => {
           dispatch(Authentication.loginError(result));
         } else {
           dispatch(Authentication.receivedLogin(result));
-          // localStorage.setItem("token", result.token);
-          // history.push("/");
         }
       },
       error => console.log(error)

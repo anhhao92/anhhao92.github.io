@@ -38,9 +38,9 @@ class Login extends React.PureComponent {
   };
 
   componentWillUpdate(nextProps) {
-    const { history } = this.props;
+    const { history, returnUrl } = this.props;
     if (nextProps.isAuthenticated) {
-      history.push('/');
+      history.push(returnUrl ? returnUrl : '/');
     }
   }
 
@@ -109,7 +109,8 @@ class Login extends React.PureComponent {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  error: state.auth.error
+  error: state.auth.error,
+  returnUrl: state.auth.returnUrl
 });
 
 export default withRouter(connect(mapStateToProps)(Login));

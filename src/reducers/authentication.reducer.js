@@ -28,7 +28,11 @@ export const auth = (state = {}, action) => {
         error: null,
         user: null
       };
-
+    case AuthenticationAction.SAVE_RETURN_URL:
+      return {
+        ...state,
+        returnUrl: action.payload
+      };
     default:
       return state;
   }
