@@ -1,4 +1,4 @@
-import { firebase } from '../configs/firebase';
+import { firebase, usersRef } from '../configs/firebase';
 
 export const AuthenticationAction = {
   LOGIN_REQUEST: 'LOGIN_REQUEST',
@@ -58,5 +58,12 @@ export const fetchUserInfo = () => dispatch => {
     } else {
       dispatch(Authentication.loginError());
     }
+  });
+};
+
+export const saveUserInfo = (id, payload) => {
+  usersRef.child(id).update({
+    credential: payload.credential,
+    additionalUserInfo: payload.additionalUserInfo
   });
 };

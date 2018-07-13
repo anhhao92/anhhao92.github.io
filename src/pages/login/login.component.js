@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions/auth.action';
+import { loginUser, saveUserInfo } from '../../actions/auth.action';
 import { Input, Label, Button, Alert } from 'reactstrap';
 import { firebase } from '../../configs/firebase';
 import firebaseui from 'firebaseui';
@@ -47,7 +47,11 @@ class Login extends React.PureComponent {
   componentDidMount() {
     const authConfig = {
       callbacks: {
-        signInSuccessWithAuthResult: () => false,
+        signInSuccessWithAuthResult: result => {
+          const id = result.additionalUserInfo.profile.id;
+          saveUserInfo(id, result);
+          return false;
+        },
         signInFailure: error => console.log(error)
       },
       signInOptions: [
