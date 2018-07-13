@@ -3,7 +3,7 @@ import { convertFromRaw } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 
 export default ({ configs }) => {
-  const contentState = configs.rawContent && convertFromRaw(configs.rawContent);
+  const contentState = configs && convertFromRaw(configs.rawContent);
   const htmlMarkup = contentState && stateToHTML(contentState);
   return (
     <div

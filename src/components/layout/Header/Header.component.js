@@ -8,13 +8,10 @@ import {
   DropdownItem
 } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
-import { FaUser, FaDashboard } from 'react-icons/lib/fa';
+import { FaDashboard } from 'react-icons/lib/fa';
 import { connect } from 'react-redux';
-import {
-  DashboardActionCreator,
-  saveDashboard
-} from '../../../actions/dashboard.action';
-import { Authentication } from '../../../actions/auth.action';
+import { DashboardActionCreator } from '../../../actions/dashboard.action';
+import { firebase } from '../../../configs/firebase';
 
 class Header extends React.PureComponent {
   onClickView = () => {
@@ -22,10 +19,10 @@ class Header extends React.PureComponent {
     dispatch(DashboardActionCreator.switchMode(false));
   };
 
-  onSave = () => {
-    const { dispatch, dashboard } = this.props;
-    dispatch(saveDashboard(dashboard));
-  };
+  // onSave = () => {
+  //   const { dispatch, dashboard } = this.props;
+  //   dispatch(saveDashboard(dashboard));
+  // };
 
   onClickEdit = () => {
     const { dispatch } = this.props;
@@ -33,12 +30,20 @@ class Header extends React.PureComponent {
   };
 
   onLogout = () => {
-    const { dispatch, history } = this.props;
-    history.push('/login');
-    dispatch(Authentication.logoutUser());
+    const { history, dispatch } = this.props;
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        dispatch({
+          type: 'LOGOUT_REQUEST'
+        });
+        history.push('/login');
+      });
   };
 
   render() {
+    const user = this.props.user;
     return (
       <Navbar>
         <Link className="navbar-brand" to="/">
@@ -47,12 +52,12 @@ class Header extends React.PureComponent {
         <Nav navbar>
           <UncontrolledDropdown nav>
             <DropdownToggle nav caret>
-              <FaUser style={{ verticalAlign: 'text-top' }} /> Admin
+              {user && (
+                <img className="user-avatar" src={user.photoURL} alt="avatar" />
+              )}
+              {user && user.displayName}
             </DropdownToggle>
             <DropdownMenu right>
-              <DropdownItem disabled={this.props.isEdit} onClick={this.onSave}>
-                Save Dashboard
-              </DropdownItem>
               <DropdownItem
                 disabled={!this.props.isEdit}
                 onClick={this.onClickView}
@@ -77,7 +82,8 @@ class Header extends React.PureComponent {
 
 const mapStateToProps = state => ({
   isEdit: state.dashboard.isEdit,
-  dashboard: state.dashboard
+  dashboard: state.dashboard,
+  user: state.auth.user
 });
 
 export default withRouter(connect(mapStateToProps)(Header));

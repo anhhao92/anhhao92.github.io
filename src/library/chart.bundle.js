@@ -539,7 +539,7 @@ module.exports = /******/ (function(modules) {
             value: function openDialog(id, successCallback, cancelCallback) {
               var _this = this;
 
-              var dialog = this.createDialog(id);
+              this.createDialog(id);
               var deleteButton = document.querySelector(
                 '#dialog-' + id + " [name='dialog-delete']"
               );
@@ -628,7 +628,7 @@ module.exports = /******/ (function(modules) {
                 var xhttp = new XMLHttpRequest();
                 xhttp.open(method, url, isAsync);
                 xhttp.onload = function() {
-                  if (this.readyState == 4 && this.status == 200) {
+                  if (this.readyState === 4 && this.status === 200) {
                     resolve(this.responseText);
                   } else {
                     reject(this.responseText);
@@ -687,8 +687,9 @@ module.exports = /******/ (function(modules) {
         if (typeof Storage !== 'undefined') {
           if (
             !!content &&
-            (typeof content === 'undefined' ? 'undefined' : _typeof(content)) ==
-              'object'
+            (typeof content === 'undefined'
+              ? 'undefined'
+              : _typeof(content)) === 'object'
           ) {
             localStorage.setItem('contacts', JSON.stringify(content));
           } else {
@@ -922,7 +923,7 @@ module.exports = /******/ (function(modules) {
                 employee.department +
                 ' </div>\n\t\t\t\t\t\t\t\t\t\t<div class="nickname" name="employeeId">' +
                 employee.employeeId +
-                ' </div>\n\t\t\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t\t\t<i><small>@kms-technology.com</small></i>\n\t\t\t\t\t\t\t\t\t\t</div>                                                                        \n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div  name="info_edit" class="profile__container__basic--edit">\n\t\t\t\t\t\t\t\t\t<input type="file" name="avatar_upload" class="profile__container__basic__avatar-upload--edit">\n\t\t\t\t\t\t\t\t\t<div name="avatar" class="profile__container__basic__avatar--edit"><img src=' +
+                ' </div>\n\t\t\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t\t\t<i><small>@yahoo.com</small></i>\n\t\t\t\t\t\t\t\t\t\t</div>                                                                        \n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div  name="info_edit" class="profile__container__basic--edit">\n\t\t\t\t\t\t\t\t\t<input type="file" name="avatar_upload" class="profile__container__basic__avatar-upload--edit">\n\t\t\t\t\t\t\t\t\t<div name="avatar" class="profile__container__basic__avatar--edit"><img src=' +
                 employee.avatarFullPath +
                 '></div>\n\t\t\t\t\t\t\t\t\t<div class="profile__container__basic__info--edit">\n\t\t\t\t\t\t\t\t\t\t<div class="name">\n\t\t\t\t\t\t\t\t\t\t\t<input type="text" name="fullName" value="' +
                 employee.fullName +
@@ -930,7 +931,7 @@ module.exports = /******/ (function(modules) {
                 buildDropDown(employee.department) +
                 '\t\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t<div class="nickname">\n\t\t\t\t\t\t\t\t\t\t\t<input type="text" name="employeeId" value="' +
                 employee.employeeId +
-                '">\t\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t\t\t<i><small>@kms-technology.com</small></i>\n\t\t\t\t\t\t\t\t\t\t</div>                                                                        \n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t<div name="action" class="profile__container__action">\n\t\t\t\t\t\t\t\t\t<i class="far fa-edit" name="edit_button"></i>\n\t\t\t\t\t\t\t\t\t' +
+                '">\t\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t\t\t<i><small>@yahoo.com</small></i>\n\t\t\t\t\t\t\t\t\t\t</div>                                                                        \n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t<div name="action" class="profile__container__action">\n\t\t\t\t\t\t\t\t\t<i class="far fa-edit" name="edit_button"></i>\n\t\t\t\t\t\t\t\t\t' +
                 (!utilities.isRoot(employee)
                   ? '<i class="fas fa-arrow-right" name="create_peer_button"></i>'
                   : '') +
@@ -1503,7 +1504,7 @@ module.exports = /******/ (function(modules) {
                   dropProfile.style.border = '';
                   e.preventDefault();
                   // A user cannot select a subordinate card of selected card to make it as a superior card
-                  if (dragSrcEl != dropEl && !dragToChild && !dragToParent) {
+                  if (dragSrcEl !== dropEl && !dragToChild && !dragToParent) {
                     var firstLevelChildsOfSrcEl = _this7.getFirstLevelChilds(
                       dragSrcEl
                     );

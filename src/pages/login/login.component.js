@@ -3,7 +3,12 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/auth.action';
 import { Input, Label, Button, Alert } from 'reactstrap';
+import { firebase } from '../../configs/firebase';
+import firebaseui from 'firebaseui';
+import 'firebaseui/dist/firebaseui.css';
 import './login.css';
+
+let authUi = null;
 
 class Login extends React.PureComponent {
   constructor(props) {
@@ -32,8 +37,38 @@ class Login extends React.PureComponent {
     e.preventDefault();
   };
 
+  componentWillUpdate(nextProps) {
+    const { history } = this.props;
+    if (nextProps.isAuthenticated) {
+      history.push('/');
+    }
+  }
+
+  componentDidMount() {
+    const authConfig = {
+      callbacks: {
+        signInSuccessWithAuthResult: () => false,
+        signInFailure: error => console.log(error)
+      },
+      signInOptions: [
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.GithubAuthProvider.PROVIDER_ID,
+        firebase.auth.TwitterAuthProvider.PROVIDER_ID
+      ],
+      signInFlow: 'popup',
+      signInSuccessUrl: '/'
+    };
+    authUi = new firebaseui.auth.AuthUI(firebase.auth());
+    authUi.start('#auth-container', authConfig);
+  }
+
+  componentWillUnmount() {
+    authUi.delete();
+  }
+
   render() {
-    const { error } = this.props.auth;
+    const { error } = this.props;
     return (
       <div className="form-container d-flex align-items-center">
         <form className="form-signin" onSubmit={this.onSubmit}>
@@ -65,6 +100,7 @@ class Login extends React.PureComponent {
           <Button color="primary" size="lg" block type="submit">
             Sign in
           </Button>
+          <div id="auth-container" />
         </form>
       </div>
     );
@@ -72,7 +108,8 @@ class Login extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  isAuthenticated: state.auth.isAuthenticated,
+  error: state.auth.error
 });
 
 export default withRouter(connect(mapStateToProps)(Login));

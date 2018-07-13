@@ -1,4 +1,5 @@
 import { CALL_API } from 'redux-api-middleware';
+import { dashboardRef } from '../configs/firebase';
 
 export const DashboardAction = {
   DASHBOARD_CREATION: 'DASHBOARD_CREATION',
@@ -53,13 +54,16 @@ export const saveDashboard = dashboard => {
   };
 };
 
-export const fetchDashboard = () => {
-  return {
-    [CALL_API]: {
-      endpoint: '/api/dashboards/20',
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-      types: ['REQUEST', 'DASHBOARD_CREATION', 'FAILED']
-    }
-  };
+export const fetchDashboard = () => dispatch => {
+  // return {
+  //   [CALL_API]: {
+  //     endpoint: '/api/dashboards/20',
+  //     method: 'GET',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     types: ['REQUEST', 'DASHBOARD_CREATION', 'FAILED']
+  //   }
+  // };
+  dashboardRef.on('value', snapshot => {
+    dispatch(DashboardActionCreator.createDashboard(snapshot.val()));
+  });
 };

@@ -4,6 +4,7 @@ export const getSampleData = (state, props) => {
   const data = state.dataSource;
   const dataType = props.configs.dataSource || 'contacts';
   const sampleData = data && data[dataType];
+
   return sampleData ? sampleData : null;
 };
 

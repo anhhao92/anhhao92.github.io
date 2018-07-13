@@ -1,11 +1,6 @@
 import { AuthenticationAction } from '../actions/auth.action';
 
-export const auth = (
-  state = {
-    isAuthenticated: localStorage.getItem('token') ? true : false
-  },
-  action
-) => {
+export const auth = (state = {}, action) => {
   switch (action.type) {
     case AuthenticationAction.LOGIN_REQUEST:
       return {
@@ -24,8 +19,16 @@ export const auth = (
       return {
         ...state,
         isAuthenticated: false,
-        error: action.payload.error
+        error: action.payload
       };
+    case AuthenticationAction.LOGOUT_REQUEST:
+      return {
+        ...state,
+        isAuthenticated: false,
+        error: null,
+        user: null
+      };
+
     default:
       return state;
   }

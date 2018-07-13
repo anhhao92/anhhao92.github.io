@@ -1,3 +1,5 @@
+import { firebase } from '../configs/firebase';
+
 export const AuthenticationAction = {
   LOGIN_REQUEST: 'LOGIN_REQUEST',
   LOGIN_SUCCEED: 'LOGIN_SUCCEED',
@@ -18,12 +20,9 @@ export const Authentication = {
     type: AuthenticationAction.LOGIN_FAILED,
     payload: error
   }),
-  logoutUser: () => {
-    localStorage.removeItem('token');
-    return {
-      type: AuthenticationAction.LOGOUT_REQUEST
-    };
-  }
+  logoutUser: () => ({
+    type: AuthenticationAction.LOGOUT_REQUEST
+  })
 };
 
 export const loginUser = (user, history) => dispatch => {
@@ -41,10 +40,20 @@ export const loginUser = (user, history) => dispatch => {
           dispatch(Authentication.loginError(result));
         } else {
           dispatch(Authentication.receivedLogin(result));
-          localStorage.setItem('token', result.token);
-          history.push('/');
+          // localStorage.setItem("token", result.token);
+          // history.push("/");
         }
       },
       error => console.log(error)
     );
+};
+
+export const fetchUserInfo = () => dispatch => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      dispatch(Authentication.receivedLogin(user));
+    } else {
+      dispatch(Authentication.loginError());
+    }
+  });
 };

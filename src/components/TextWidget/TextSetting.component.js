@@ -8,7 +8,7 @@ import './text-setting.css';
 class TextSetting extends React.PureComponent {
   constructor(props) {
     super(props);
-    const rawContent = this.props.configs.rawContent;
+    const rawContent = this.props.configs && this.props.configs.rawContent;
     this.state = {
       editorState: rawContent
         ? EditorState.createWithContent(

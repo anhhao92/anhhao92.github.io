@@ -1,4 +1,5 @@
 import { CALL_API } from 'redux-api-middleware';
+import { tasksRef } from '../configs/firebase';
 
 let nextTodoId = 25;
 export const VisibilityFilters = {
@@ -35,34 +36,31 @@ export const ToDoListCreator = {
   })
 };
 
-export const fetchToDoList = widgetId => {
-  //   fetch(`api/tasks/`)
-  //     .then(res => res && res.json())
-  //     .then(
-  //       data => {
-  //         result.widgetId = widgetId;
-  //         result.tasks = data;
-  //         dispatch(ToDoListCreator.fetchTodo(result));
-  //       },
-  //       error => console.log(error)
-  //     );
+export const fetchToDoList = widgetId => dispatch => {
+  tasksRef.on('value', snapshot => {
+    dispatch({
+      type: 'FETCH_TODO',
+      meta: widgetId,
+      payload: snapshot.val()
+    });
+  });
 
-  return {
-    [CALL_API]: {
-      endpoint: `/api/tasks/`,
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-      types: [
-        'REQUEST',
-        {
-          type: 'FETCH_TODO',
-          meta: widgetId
-        },
-        'FAILED'
-      ],
-      bailout: state => {
-        return Object.keys(state.todos).length === 0 ? false : true;
-      }
-    }
-  };
+  // return {
+  //   [CALL_API]: {
+  //     endpoint: `/api/tasks/`,
+  //     method: 'GET',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     types: [
+  //       'REQUEST',
+  //       {
+  //         type: 'FETCH_TODO',
+  //         meta: widgetId
+  //       },
+  //       'FAILED'
+  //     ],
+  //     bailout: state => {
+  //       return Object.keys(state.todos).length === 0 ? false : true;
+  //     }
+  //   }
+  // };
 };
