@@ -1,3 +1,14 @@
-.error-content {
-  color: #ffffff;
+.error {
+  &-container {
+    height: 100%;
+    background-image: url(/images/bg.png);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: contain;
+    background-color: #002650;
+  }
+
+  &-content {
+    color: #ffffff;
+  }
 }

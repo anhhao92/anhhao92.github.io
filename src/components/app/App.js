@@ -1,23 +1,36 @@
 import React from 'react';
-import Dashboard from '../../pages/dashboard/dashboard.component';
-import DashboardLayout from '../Layout/DashboardLayout/DashboardLayout.component';
-import Login from '../../pages/login/login.component';
-import ViewWidget from '../../pages/view/ViewWidget.component';
-import Profile from '../../pages/profile/profile.component';
-import NotFound from '../../pages/notfound/notfound.component';
-
+import AsyncComponent from '../AsyncComponent/async.component';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withAuth } from './Auth';
 import { fetchUserInfo } from '../../actions/auth.action';
 
+const AsyncLogin = AsyncComponent(() =>
+  import('../../pages/login/login.component')
+);
+const AsyncProfile = AsyncComponent(() =>
+  import('../../pages/profile/profile.component')
+);
+const AsyncNotFound = AsyncComponent(() =>
+  import('../../pages/notfound/notfound.component')
+);
+const AsyncViewWidget = AsyncComponent(() =>
+  import('../../pages/view/ViewWidget.component')
+);
+const AsyncDashboard = AsyncComponent(() =>
+  import('../../pages/dashboard/dashboard.component')
+);
+const AsyncDashboardLayout = AsyncComponent(() =>
+  import('../Layout/DashboardLayout/DashboardLayout.component')
+);
+
 const DashboardRoute = ({ component: Component, ...props }) => (
   <Route
     {...props}
     render={matchProps => (
-      <DashboardLayout>
+      <AsyncDashboardLayout>
         <Component {...matchProps} />
-      </DashboardLayout>
+      </AsyncDashboardLayout>
     )}
   />
 );
@@ -31,15 +44,15 @@ class App extends React.PureComponent {
     return (
       <BrowserRouter>
         <Switch>
-          <DashboardRoute exact path="/" component={withAuth(Dashboard)} />
+          <DashboardRoute exact path="/" component={withAuth(AsyncDashboard)} />
           <DashboardRoute
             exact
             path="/view/:id"
-            component={withAuth(ViewWidget)}
+            component={withAuth(AsyncViewWidget)}
           />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/profile" component={withAuth(Profile)} />
-          <Route component={NotFound} />
+          <Route exact path="/login" component={AsyncLogin} />
+          <Route exact path="/profile" component={withAuth(AsyncProfile)} />
+          <Route component={AsyncNotFound} />
         </Switch>
       </BrowserRouter>
     );
