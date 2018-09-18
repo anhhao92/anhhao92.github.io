@@ -86,20 +86,20 @@ export default class ProfileComponent extends React.PureComponent {
               </div>
               <ul className="mb-5 overview">
                 <li>
-                  I'm experienced in using javascript frameworks and .NET to
-                  provide a robust web application.
+                  I'm experienced in using many JavaScript frameworks and
+                  RESTful API to build a robust web application.
                 </li>
                 <li>
                   4+ years of experience in developing web-based applications.
                 </li>
                 <li>
-                  2+ years of experience working with C#/ASP.NET MVC, Entity
-                  Framework, WebAPI, MSSQL.
+                  3+ years of experience working with front-end frameworks like
+                  Angular 2+ React, Redux, jQuery, ES6/7, TypeScript, SCSS,
+                  HTML5/CSS3, Bootstrap 4, Material, Node.js
                 </li>
                 <li>
-                  2+ years of experience working with front-end frameworks like
-                  Angular 2+ React, Redux, jQuery, ES6/7, Typescript, SCSS,
-                  HTML5/CSS3, Bootstrap, Material, Node.js
+                  2+ years of experience working with C#/ASP.NET MVC, Entity
+                  Framework, WebAPI, MSSQL.
                 </li>
                 <li>
                   Experienced in merging, branching & managing source code using

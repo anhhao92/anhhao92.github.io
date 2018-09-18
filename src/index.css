@@ -23,7 +23,7 @@ body,
   height: 100px; }
 
 .lds-hourglass:after {
-  content: " ";
+  content: ' ';
   display: block;
   border-radius: 50%;
   box-sizing: border-box;

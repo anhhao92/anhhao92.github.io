@@ -4,6 +4,7 @@ import DashboardLayout from '../Layout/DashboardLayout/DashboardLayout.component
 import Login from '../../pages/login/login.component';
 import ViewWidget from '../../pages/view/ViewWidget.component';
 import Profile from '../../pages/profile/profile.component';
+import NotFound from '../../pages/notfound/notfound.component';
 
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -38,6 +39,7 @@ class App extends React.PureComponent {
           />
           <Route exact path="/login" component={Login} />
           <Route exact path="/profile" component={withAuth(Profile)} />
+          <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
     );
