@@ -2,7 +2,7 @@ import React from 'react';
 import { InputGroup, Input, Table, Button } from 'reactstrap';
 import { FaCircleO, FaCheckCircleO, FaClose } from 'react-icons/lib/fa';
 import { VisibilityFilters } from '../../actions/todo.action';
-import './todo.css';
+import './todo.scss';
 
 export const TodoWidgetView = props => {
   return (

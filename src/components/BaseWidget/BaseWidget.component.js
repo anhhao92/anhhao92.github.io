@@ -8,7 +8,7 @@ import {
   getMaximizeButtonState,
   getRemoveButtonState
 } from '../../selectors/baseWidget.selectors';
-import './base.css';
+import './base.scss';
 
 class BaseWidget extends React.PureComponent {
   onClickSetting = () => {
@@ -23,11 +23,6 @@ class BaseWidget extends React.PureComponent {
     const { dispatch, widgetId } = this.props;
     dispatch(DashboardActionCreator.deleteWidget(widgetId));
   };
-
-  // saveAndClose = () => {
-  //   const { dispatch, widgetId } = this.props;
-  //   dispatch(DashboardActionCreator.goToSetting(widgetId, false));
-  // };
 
   render() {
     const {

@@ -6,7 +6,7 @@ import { Input, Label, Button, Alert } from 'reactstrap';
 import { firebase } from '../../configs/firebase';
 import firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
-import './login.css';
+import classes from './login.module.scss';
 
 let authUi = null;
 
@@ -74,8 +74,8 @@ class Login extends React.PureComponent {
   render() {
     const { error } = this.props;
     return (
-      <div className="form-container d-flex align-items-center">
-        <form className="form-signin" onSubmit={this.onSubmit}>
+      <div className={classes.formContainer}>
+        <form className={classes.formSignIn} onSubmit={this.onSubmit}>
           <h3 className="text-center">Please sign in</h3>
           {error && <Alert color="danger">{error}</Alert>}
           <div className="form-group">

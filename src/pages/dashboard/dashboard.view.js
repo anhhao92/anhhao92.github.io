@@ -4,7 +4,7 @@ import BaseSetting from '../../components/WidgetSetting/BaseSetting.component';
 import { FaStop, FaThList, FaTh, FaThLarge } from 'react-icons/lib/fa';
 import { MdViewArray } from 'react-icons/lib/md';
 import { LAYOUT_TYPES, SYSTEM_COMPONENTS } from '../../constants';
-import './dashboard.css';
+import './dashboard.scss';
 
 const LayoutControls = ({ layoutType, onChangeLayout }) => (
   <span className="dashboard-layout">

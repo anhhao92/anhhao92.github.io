@@ -1,3 +1,7 @@
+@import '~bootstrap/scss/bootstrap';
+@import '~react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+@import '~react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+
 body {
   margin: 0;
   padding: 0;
@@ -14,7 +18,7 @@ body,
   border-radius: 100%;
   margin-top: -4px;
   margin-right: 4px;
-  transition: all 0.2s ease;
+  transition: all 0.21s ease;
   max-height: 40px;
 }
 
@@ -24,16 +28,18 @@ body,
   position: absolute;
   width: 100px;
   height: 100px;
+
+  &:after {
+    content: ' ';
+    display: block;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 50px solid #fcf;
+    border-color: #fcf transparent #fcf transparent;
+    animation: lds-hourglass 1.2s infinite;
+  }
 }
-.lds-hourglass:after {
-  content: ' ';
-  display: block;
-  border-radius: 50%;
-  box-sizing: border-box;
-  border: 50px solid #fcf;
-  border-color: #fcf transparent #fcf transparent;
-  animation: lds-hourglass 1.2s infinite;
-}
+
 @keyframes lds-hourglass {
   0% {
     transform: rotate(0);

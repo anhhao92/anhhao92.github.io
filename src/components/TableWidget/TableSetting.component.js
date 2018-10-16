@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Input, Label } from 'reactstrap';
 import { getAvailableColumns } from '../../selectors/dataTable.selectors';
 import { DashboardActionCreator } from '../../actions/dashboard.action';
-import './tableSetting.css';
+import './tableSetting.scss';
 
 class TableSetting extends React.PureComponent {
   constructor(props) {

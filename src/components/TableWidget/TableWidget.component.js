@@ -7,7 +7,7 @@ import {
   getDataSource,
   getDisplayedColumns
 } from '../../selectors/dataTable.selectors';
-import './tableSetting.css';
+import './tableSetting.scss';
 
 class TableWidget extends React.PureComponent {
   componentWillMount() {

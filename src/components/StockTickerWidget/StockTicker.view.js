@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import { FaArrowUp, FaArrowDown } from 'react-icons/lib/fa';
-import './stock.css';
+import './stock.scss';
 
 export const StockItem = ({ stock, onRemove }) => (
   <span className="badge badge-info">

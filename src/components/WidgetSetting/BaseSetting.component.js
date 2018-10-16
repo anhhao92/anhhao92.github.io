@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Input, Label } from 'reactstrap';
 import { DashboardActionCreator } from '../../actions/dashboard.action';
 import { SETTING_COMPONENTS } from '../../constants';
-import './baseSetting.css';
+import './baseSetting.scss';
 
 class BaseSetting extends React.PureComponent {
   constructor(props) {

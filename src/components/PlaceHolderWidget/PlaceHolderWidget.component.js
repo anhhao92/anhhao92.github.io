@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { DashboardActionCreator } from '../../actions/dashboard.action';
 import { FaPlus } from 'react-icons/lib/fa';
-import './placeHolder.css';
+import './placeHolder.scss';
 
 class PlaceHolderWidget extends React.PureComponent {
   onClick = () => {
@@ -13,7 +13,7 @@ class PlaceHolderWidget extends React.PureComponent {
   render() {
     return (
       <div onClick={this.onClick} className="add-content">
-        <FaPlus size={100} />{' '}
+        <FaPlus size={100} />
       </div>
     );
   }
