@@ -6,6 +6,7 @@ import { todos } from './todo.reducer';
 import { dataReport } from './simpleChart.reducer';
 import { stockTicker } from './stockTicker.reducer';
 import { auth } from './authentication.reducer';
+import { locales } from './locales.reducer';
 
 export default combineReducers({
   routing: routerReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   todos,
   dataReport,
   stockTicker,
-  auth
+  auth,
+  locales
 });

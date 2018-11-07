@@ -1,0 +1,23 @@
+{
+  "tools.dependantDeduction": "Giảm trừ gia cảnh người phụ thuộc",
+  "tools.deduction": "Giảm trừ gia cảnh bản thân",
+  "tools.grossIncome": "Thu nhập trước thuế",
+  "tools.netIncome": "Thu nhập sau thuế",
+  "tools.socialInsurance": "Bảo hiểm xã hội",
+  "tools.healthInsurance": "Bảo hiểm y tế",
+  "tools.unemploymentInsurance": "Bảo hiểm thất nghiệp",
+  "tools.taxableIncome": "Thu nhập chịu thuế",
+  "tools.pit": "Thuế thu nhập cá nhân",
+  "tools.pitDetail": "Chi tiết thuế thu nhập cá nhân",
+  "tools.grossIncomeTooltip": "Thuế thu nhập trước thuế",
+  "tools.personal": "Cá nhân",
+  "tools.dependant": "Phụ thộc",
+  "tools.totalDependant": "Số người phụ thuộc",
+  "tools.level_1": "Đến 5 triệu",
+  "tools.level_2": "Từ 5 - 10 triệu",
+  "tools.level_3": "Từ 10 - 18 triệu",
+  "tools.level_4": "Từ 18 - 32 triệu",
+  "tools.level_5": "Từ 32 - 52 triệu",
+  "tools.level_6": "Từ 52 - 80 triệu",
+  "tools.level_7": "Trên 80 triệu "
+}

@@ -1,0 +1,23 @@
+{
+  "tools.dependantDeduction": "Dependant Deduction",
+  "tools.deduction": "Self Deduction",
+  "tools.grossIncome": "GROSS Income",
+  "tools.netIncome": "NET Income",
+  "tools.socialInsurance": "Social Insurance",
+  "tools.healthInsurance": "Health Insurance",
+  "tools.unemploymentInsurance": "Unemployment Insurance",
+  "tools.taxableIncome": "Taxable Income",
+  "tools.pit": "Personal Income Tax",
+  "tools.pitDetail": "Personal Income Tax Detail",
+  "tools.grossIncomeTooltip": "Income before Tax",
+  "tools.personal": "Personal",
+  "tools.dependant": "Dependant",
+  "tools.totalDependant": "Total",
+  "tools.level_1": "From 5M",
+  "tools.level_2": "From 5 - 10M",
+  "tools.level_3": "From 10 - 18M",
+  "tools.level_4": "From 18 - 32M",
+  "tools.level_5": "From 32 - 52M",
+  "tools.level_6": "From 52 - 80M",
+  "tools.level_7": "Above 80M"
+}

@@ -7,6 +7,7 @@ import {
   NavLink,
   Navbar
 } from 'reactstrap';
+import './profile.css';
 
 export default class ProfileComponent extends React.PureComponent {
   constructor(props) {

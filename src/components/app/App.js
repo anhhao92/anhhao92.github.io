@@ -24,6 +24,10 @@ const AsyncDashboardLayout = AsyncComponent(() =>
   import('../Layout/DashboardLayout/DashboardLayout.component')
 );
 
+const AsyncIncomeConversion = AsyncComponent(() =>
+  import('../../pages/tools/IncomeConversion.component')
+);
+
 const DashboardRoute = ({ component: Component, ...props }) => (
   <Route
     {...props}
@@ -51,6 +55,7 @@ class App extends React.PureComponent {
             component={withAuth(AsyncViewWidget)}
           />
           <Route exact path="/login" component={AsyncLogin} />
+          <Route exact path="/tools" component={AsyncIncomeConversion} />
           <Route exact path="/profile" component={withAuth(AsyncProfile)} />
           <Route component={AsyncNotFound} />
         </Switch>
