@@ -1,4 +1,3 @@
-import { CALL_API } from 'redux-api-middleware';
 import { reportsRef } from '../configs/firebase';
 
 export const SimpleChartAction = {
@@ -24,19 +23,4 @@ export const fetchDataReport = (source, field) => dispatch => {
       payload: snapshot.val()
     });
   });
-  // return {
-  //   [CALL_API]: {
-  //     endpoint: `/api/reports/_countby/${dataType}/${dataField}`,
-  //     method: 'GET',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     types: [
-  //       'REQUEST',
-  //       {
-  //         type: 'FETCH_REPORT',
-  //         meta: { dataType, dataField }
-  //       },
-  //       'FAILED'
-  //     ]
-  //   }
-  // };
 };

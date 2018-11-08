@@ -1,4 +1,3 @@
-import { CALL_API } from 'redux-api-middleware';
 import { contactsRef } from '../configs/firebase';
 
 export const fetchDataSource = type => dispatch => {
@@ -18,22 +17,4 @@ export const fetchDataSource = type => dispatch => {
       payload: snapshot.val()
     });
   });
-  // return {
-  //   [CALL_API]: {
-  //     endpoint: `/api/${dataType}/`,
-  //     method: 'GET',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     types: [
-  //       'REQUEST',
-  //       {
-  //         type: 'FETCH_DATA_SOURCE',
-  //         meta: dataType
-  //       },
-  //       'FAILED'
-  //     ],
-  //     bailout: state => {
-  //       return state.dataSource[dataType] === undefined ? false : true;
-  //     }
-  //   }
-  // };
 };

@@ -6,13 +6,9 @@ import { withFormik, Field, FieldArray } from 'formik';
 import { changeLanguague } from '../../actions/tools.action';
 import Tooltip from '@material-ui/core/Tooltip';
 import FaQuestionCircleO from 'react-icons/lib/fa/question-circle';
-import { PIT_LEVELS } from '../../constants';
+import { PIT_LEVELS, MINIMUM_WAGE } from '../../constants';
 
 class IncomeConversionComponent extends React.PureComponent {
-  state = {
-    value: ''
-  };
-
   convertToNumber(input) {
     return parseInt(input.replace(/[\D]/g, ''), 10);
   }
@@ -24,6 +20,7 @@ class IncomeConversionComponent extends React.PureComponent {
 
   convertGrossToNet = () => {
     const { values } = this.props;
+    console.log(values);
     const maxSI = this.convertToNumber(values.minimumWage) * 20;
     const mDependant =
       this.convertToNumber(values.dependant) * values.totalDependant;
@@ -41,9 +38,19 @@ class IncomeConversionComponent extends React.PureComponent {
       <div className="container">
         <div className="row">
           <div className="col-md-4 order-md-2 mb-4">
-            <h4 className="mb-3">Currency</h4>
+            <h4 className="mb-3">
+              <FormattedMessage
+                id="tools.section.calBy"
+                defaultMessage="Default message"
+              />
+            </h4>
             <div className="form-group row">
-              <label className="col-sm-6 col-form-label">Monetary</label>
+              <label className="col-sm-6 col-form-label">
+                <FormattedMessage
+                  id="tools.section.currency"
+                  defaultMessage="Default message"
+                />
+              </label>
               <div className="col-sm-6">
                 <Field
                   component="select"
@@ -55,7 +62,12 @@ class IncomeConversionComponent extends React.PureComponent {
                 </Field>
               </div>
             </div>
-            <h4 className="mb-3">Deduction</h4>
+            <h4 className="mb-3">
+              <FormattedMessage
+                id="tools.section.deduction"
+                defaultMessage="Default message"
+              />
+            </h4>
             <div className="form-group row">
               <label className="col-sm-6 col-form-label">
                 <FormattedMessage
@@ -94,7 +106,12 @@ class IncomeConversionComponent extends React.PureComponent {
               </div>
             </div>
 
-            <h4 className="mb-3">PIT Level</h4>
+            <h4 className="mb-3">
+              <FormattedMessage
+                id="tools.section.pitLevel"
+                defaultMessage="Default message"
+              />
+            </h4>
             <FieldArray
               name="pitLevels"
               render={arrayHelpers => (
@@ -121,19 +138,40 @@ class IncomeConversionComponent extends React.PureComponent {
               )}
             />
 
-            <h4 className="mb-3">Setting</h4>
+            <h4 className="mb-3">
+              <FormattedMessage
+                id="tools.section.setting"
+                defaultMessage="Default message"
+              />
+            </h4>
             <div className="form-group row">
-              <label className="col-sm-6 col-form-label">Minimum Wage</label>
+              <label className="col-sm-6 col-form-label">
+                <FormattedMessage
+                  id="tools.minimumWage"
+                  defaultMessage="Default message"
+                />
+              </label>
               <div className="col-sm-6">
                 <Field
-                  type="text"
+                  component="select"
                   name="minimumWage"
                   className="form-control"
-                />
+                >
+                  {MINIMUM_WAGE.map((item, idx) => (
+                    <option key={idx} value={item.value}>
+                      {item.region}
+                    </option>
+                  ))}
+                </Field>
               </div>
             </div>
             <div className="form-group row">
-              <label className="col-sm-6 col-form-label">Languague</label>
+              <label className="col-sm-6 col-form-label">
+                <FormattedMessage
+                  id="tools.lang"
+                  defaultMessage="Default message"
+                />
+              </label>
               <div className="col-sm-6">
                 <select
                   defaultValue={this.props.lang}
@@ -147,10 +185,20 @@ class IncomeConversionComponent extends React.PureComponent {
             </div>
           </div>
           <div className="col-md-8 order-md-1">
-            <h4 className="mb-3">Calculation GROSS and NET Income</h4>
+            <h4 className="mb-3">
+              <FormattedMessage
+                id="tools.section.title"
+                defaultMessage="Default message"
+              />
+            </h4>
             <div className="row">
               <div className="col-md-6 mb-3">
-                <label>Income</label>
+                <label>
+                  <FormattedMessage
+                    id="tools.income"
+                    defaultMessage="Default message"
+                  />
+                </label>
                 <Field name="income" className="form-control" />
               </div>
             </div>
@@ -172,7 +220,12 @@ class IncomeConversionComponent extends React.PureComponent {
             </div>
             <div className="row">
               <div className="col-md-12">
-                <h4 className="mb-3">Detail</h4>
+                <h4 className="mt-3">
+                  <FormattedMessage
+                    id="tools.section.detail"
+                    defaultMessage="Default message"
+                  />
+                </h4>
               </div>
             </div>
             <div className="row">
@@ -325,7 +378,7 @@ const withForm = withFormik({
     hi: 1.5,
     ui: 1,
     currency: 'vnd',
-    minimumWage: '1,150,000',
+    minimumWage: '3,980,000',
     personal: '9,000,000',
     dependant: '3,600,000',
     totalDependant: 0,

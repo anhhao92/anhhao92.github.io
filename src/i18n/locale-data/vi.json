@@ -19,5 +19,16 @@
   "tools.level_4": "Từ 18 - 32 triệu",
   "tools.level_5": "Từ 32 - 52 triệu",
   "tools.level_6": "Từ 52 - 80 triệu",
-  "tools.level_7": "Trên 80 triệu "
+  "tools.level_7": "Trên 80 triệu",
+  "tools.minimumWage": "Vùng",
+  "tools.lang": "Ngôn ngữ",
+  "tools.income": "Thu nhập",
+  "tools.section.title": "Tính lương GROSS và NET",
+  "tools.section.detail": "Chi tiết thu nhập",
+  "tools.section.pit": "Chi tiết thuế thu nhập cá nhân",
+  "tools.section.pitLevel": "Bậc thuế",
+  "tools.section.setting": "Cài đặt",
+  "tools.section.deduction": "Giảm trừ",
+  "tools.section.calBy": "Tính theo",
+  "tools.section.currency": "Loại tiền"
 }

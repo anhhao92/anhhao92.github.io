@@ -19,5 +19,16 @@
   "tools.level_4": "From 18 - 32M",
   "tools.level_5": "From 32 - 52M",
   "tools.level_6": "From 52 - 80M",
-  "tools.level_7": "Above 80M"
+  "tools.level_7": "Above 80M",
+  "tools.minimumWage": "Region",
+  "tools.lang": "Language",
+  "tools.income": "Income",
+  "tools.section.title": "Calculation GROSS and NET Income",
+  "tools.section.detail": "Detail",
+  "tools.section.pit": "Personal Income Tax Detail",
+  "tools.section.pitLevel": "PIT Level",
+  "tools.section.setting": "Setting",
+  "tools.section.deduction": "Deduction",
+  "tools.section.calBy": "Currency",
+  "tools.section.currency": "Currency"
 }

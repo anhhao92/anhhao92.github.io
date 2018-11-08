@@ -55,3 +55,22 @@ export const PIT_LEVELS = [
     to: -1
   }
 ];
+
+export const MINIMUM_WAGE = [
+  {
+    region: 'I',
+    value: '3,980,000'
+  },
+  {
+    region: 'II',
+    value: '3,530,000'
+  },
+  {
+    region: 'III',
+    value: '3,090,000'
+  },
+  {
+    region: 'IV',
+    value: '2,760,000'
+  }
+];

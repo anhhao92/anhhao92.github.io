@@ -1,4 +1,3 @@
-import { CALL_API } from 'redux-api-middleware';
 import { tasksRef } from '../configs/firebase';
 
 let nextTodoId = 25;
@@ -44,23 +43,4 @@ export const fetchToDoList = widgetId => dispatch => {
       payload: snapshot.val()
     });
   });
-
-  // return {
-  //   [CALL_API]: {
-  //     endpoint: `/api/tasks/`,
-  //     method: 'GET',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     types: [
-  //       'REQUEST',
-  //       {
-  //         type: 'FETCH_TODO',
-  //         meta: widgetId
-  //       },
-  //       'FAILED'
-  //     ],
-  //     bailout: state => {
-  //       return Object.keys(state.todos).length === 0 ? false : true;
-  //     }
-  //   }
-  // };
 };
