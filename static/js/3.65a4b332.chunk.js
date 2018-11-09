@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{1147:function(e,a,t){},2198:function(e,a,t){"use strict";t.r(a);var n=t(0),r=t.n(n);t(1147);a.default=function(){return r.a.createElement("div",{className:"error-container d-flex"},r.a.createElement("div",{className:"text-center m-auto"},r.a.createElement("h2",{className:"error-content"},"404 - PAGE NOT FOUND"),r.a.createElement("a",{className:"btn btn-primary",href:"/"},"Home")))}}}]);
+//# sourceMappingURL=3.65a4b332.chunk.js.map
