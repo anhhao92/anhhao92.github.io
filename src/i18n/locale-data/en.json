@@ -23,12 +23,13 @@
   "tools.minimumWage": "Region",
   "tools.lang": "Language",
   "tools.income": "Income",
+  "tools.incomeBeforeTax": "Income Before Tax",
   "tools.section.title": "Calculation GROSS and NET Income",
   "tools.section.detail": "Detail",
-  "tools.section.pit": "Personal Income Tax Detail",
   "tools.section.pitLevel": "PIT Level",
   "tools.section.setting": "Setting",
   "tools.section.deduction": "Deduction",
   "tools.section.calBy": "Currency",
-  "tools.section.currency": "Currency"
+  "tools.section.currency": "Currency",
+  "tools.minimumWageTooltip": "Minimum wage for this region is {value} VND"
 }

@@ -45,7 +45,7 @@ export const PIT_LEVELS = [
     value: 0,
     from: 52e6,
     to: 8e7,
-    maximum: 84e6
+    maximum: 84e5
   },
   {
     title: 'tools.level_7',

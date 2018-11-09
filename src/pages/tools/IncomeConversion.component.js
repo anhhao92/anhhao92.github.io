@@ -10,7 +10,10 @@ import { PIT_LEVELS, MINIMUM_WAGE } from '../../constants';
 
 class IncomeConversionComponent extends React.PureComponent {
   convertToNumber(input) {
-    return parseInt(input.replace(/[\D]/g, ''), 10);
+    if (typeof input === 'string') {
+      return parseInt(input.replace(/[\D]/g, ''), 10);
+    }
+    return null;
   }
 
   onChangeLanguage = event => {
@@ -18,19 +21,74 @@ class IncomeConversionComponent extends React.PureComponent {
     this.props.changeLanguague(value);
   };
 
-  convertGrossToNet = () => {
+  parseFormValueToNumber() {
     const { values } = this.props;
-    console.log(values);
-    const maxSI = this.convertToNumber(values.minimumWage) * 20;
-    const mDependant =
-      this.convertToNumber(values.dependant) * values.totalDependant;
-    const grossIncome = this.convertToNumber(values.income);
-    const mGross = grossIncome <= maxSI ? grossIncome : maxSI;
-    const mSelf = Math.floor(
-      grossIncome - (mGross * (values.si + values.hi + values.ui)) / 100
+    return {
+      ...values,
+      income: this.convertToNumber(values.income),
+      minimumWage: this.convertToNumber(values.minimumWage),
+      personal: this.convertToNumber(values.personal),
+      dependant: this.convertToNumber(values.dependant)
+    };
+  }
+
+  calculatePIT(taxableIncome) {
+    let result = 0;
+    const { pitLevels } = this.props.values;
+    const lastLevel = pitLevels.length - 1;
+    for (var i = 0; i < lastLevel; i++) {
+      if (taxableIncome >= pitLevels[i].to)
+        pitLevels[i].value = pitLevels[i].maximum;
+      else if (
+        pitLevels[i].from <= taxableIncome &&
+        taxableIncome <= pitLevels[i].to
+      )
+        pitLevels[i].value = Math.floor(
+          ((taxableIncome - pitLevels[i].from) * pitLevels[i].percentage) / 100
+        );
+      else pitLevels[i].value = 0;
+      result = result + pitLevels[i].value;
+    }
+    if (taxableIncome > pitLevels[lastLevel].from)
+      pitLevels[lastLevel].value = Math.floor(
+        ((taxableIncome - pitLevels[lastLevel].from) *
+          pitLevels[lastLevel].percentage) /
+          100
+      );
+    else pitLevels[lastLevel].value = 0;
+    result += pitLevels[lastLevel].value;
+    return result;
+  }
+
+  convertGrossToNet = () => {
+    const { setFieldValue } = this.props;
+    const values = this.parseFormValueToNumber();
+    const maxSI = values.minimumWage * 20;
+    const deduction =
+      values.personal + values.dependant * values.totalDependant;
+    const incomeForSI = values.income <= maxSI ? values.income : maxSI;
+    const incomeAfterSI = Math.floor(
+      values.income - (incomeForSI * (values.si + values.hi + values.ui)) / 100
     );
-    const mct = mSelf - this.convertToNumber(values.personal) - mDependant;
+    const incomeForPIT = incomeAfterSI - deduction;
+    const incomePIT = incomeForPIT < 0 ? 0 : incomeForPIT;
+    const totalTax = this.calculatePIT(incomePIT);
+    setFieldValue('incomeBeforeTax', incomeAfterSI);
+    setFieldValue('taxableIncome', incomePIT);
+    setFieldValue('incomeForSI', Math.floor(incomeForSI * values.si) / 100);
+    setFieldValue('incomeForHI', Math.floor(incomeForSI * values.hi) / 100);
+    setFieldValue('incomeForUI', Math.floor(incomeForSI * values.ui) / 100);
+    setFieldValue(
+      'dependantDeduction',
+      values.dependant * values.totalDependant
+    );
+    setFieldValue('totalPIT', totalTax);
+    setFieldValue('netIncome', incomeAfterSI - totalTax);
   };
+
+  formattedNumber(value) {
+    return parseFloat(value).toLocaleString();
+  }
 
   render() {
     const { values } = this.props;
@@ -38,30 +96,6 @@ class IncomeConversionComponent extends React.PureComponent {
       <div className="container">
         <div className="row">
           <div className="col-md-4 order-md-2 mb-4">
-            <h4 className="mb-3">
-              <FormattedMessage
-                id="tools.section.calBy"
-                defaultMessage="Default message"
-              />
-            </h4>
-            <div className="form-group row">
-              <label className="col-sm-6 col-form-label">
-                <FormattedMessage
-                  id="tools.section.currency"
-                  defaultMessage="Default message"
-                />
-              </label>
-              <div className="col-sm-6">
-                <Field
-                  component="select"
-                  name="currency"
-                  className="form-control"
-                >
-                  <option value="usd">USD</option>
-                  <option value="vnd">VND</option>
-                </Field>
-              </div>
-            </div>
             <h4 className="mb-3">
               <FormattedMessage
                 id="tools.section.deduction"
@@ -150,6 +184,20 @@ class IncomeConversionComponent extends React.PureComponent {
                   id="tools.minimumWage"
                   defaultMessage="Default message"
                 />
+
+                <FormattedMessage
+                  id="tools.minimumWageTooltip"
+                  defaultMessage="Default message"
+                  values={{
+                    value: values.minimumWage
+                  }}
+                >
+                  {message => (
+                    <Tooltip title={message}>
+                      <FaQuestionCircleO />
+                    </Tooltip>
+                  )}
+                </FormattedMessage>
               </label>
               <div className="col-sm-6">
                 <Field
@@ -201,6 +249,22 @@ class IncomeConversionComponent extends React.PureComponent {
                 </label>
                 <Field name="income" className="form-control" />
               </div>
+              <div className="col-md-4">
+                <label>
+                  <FormattedMessage
+                    id="tools.section.currency"
+                    defaultMessage="Default message"
+                  />
+                </label>
+                <Field
+                  component="select"
+                  name="currency"
+                  className="form-control"
+                >
+                  <option value="usd">USD</option>
+                  <option value="vnd">VND</option>
+                </Field>
+              </div>
             </div>
             <div className="row">
               <div className="col-md-6">
@@ -248,7 +312,9 @@ class IncomeConversionComponent extends React.PureComponent {
                         )}
                       </FormattedMessage>
                     </h6>
-                    <span className="text-success">1000000</span>
+                    <span className="text-success">
+                      {this.formattedNumber(values.income)}
+                    </span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between">
                     <h6>
@@ -258,7 +324,9 @@ class IncomeConversionComponent extends React.PureComponent {
                       />{' '}
                       (8%)
                     </h6>
-                    <span className="text-success">1000000</span>
+                    <span className="text-success">
+                      {this.formattedNumber(values.incomeForSI)}
+                    </span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between">
                     <h6>
@@ -268,7 +336,9 @@ class IncomeConversionComponent extends React.PureComponent {
                       />{' '}
                       (1.5%)
                     </h6>
-                    <span className="text-success">1000000</span>
+                    <span className="text-success">
+                      {this.formattedNumber(values.incomeForHI)}
+                    </span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between">
                     <h6>
@@ -278,8 +348,23 @@ class IncomeConversionComponent extends React.PureComponent {
                       />{' '}
                       (0.5%)
                     </h6>
-                    <span className="text-success">1000000</span>
+                    <span className="text-success">
+                      {this.formattedNumber(values.incomeForUI)}
+                    </span>
                   </li>
+
+                  <li className="list-group-item d-flex justify-content-between">
+                    <h6>
+                      <FormattedMessage
+                        id="tools.incomeBeforeTax"
+                        defaultMessage="Default message"
+                      />
+                    </h6>
+                    <span className="text-success">
+                      {this.formattedNumber(values.incomeBeforeTax)}
+                    </span>
+                  </li>
+
                   <li className="list-group-item d-flex justify-content-between">
                     <h6>
                       <FormattedMessage
@@ -297,7 +382,7 @@ class IncomeConversionComponent extends React.PureComponent {
                       />
                     </h6>
                     <span className="text-success">
-                      {values.totalDependant}
+                      {this.formattedNumber(values.dependantDeduction)}
                     </span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between">
@@ -307,7 +392,9 @@ class IncomeConversionComponent extends React.PureComponent {
                         defaultMessage="Default message"
                       />
                     </h6>
-                    <span className="text-success">1000000</span>
+                    <span className="text-success">
+                      {this.formattedNumber(values.taxableIncome)}
+                    </span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between">
                     <h6>
@@ -316,7 +403,9 @@ class IncomeConversionComponent extends React.PureComponent {
                         defaultMessage="Default message"
                       />
                     </h6>
-                    <span className="text-success">1000000</span>
+                    <span className="text-success">
+                      {this.formattedNumber(values.totalPIT)}
+                    </span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between">
                     <h6>
@@ -335,7 +424,9 @@ class IncomeConversionComponent extends React.PureComponent {
                         )}
                       </FormattedMessage>
                     </h6>
-                    <span className="text-success">1000000</span>
+                    <span className="text-success">
+                      {this.formattedNumber(values.netIncome)}
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -361,7 +452,9 @@ class IncomeConversionComponent extends React.PureComponent {
                     />{' '}
                     (%)
                   </h6>
-                  <h6 className="col-sm-6 text-right">{item.value}</h6>
+                  <h6 className="col-sm-6 text-right">
+                    {this.formattedNumber(item.value)}
+                  </h6>
                 </React.Fragment>
               ))}
             </div>
@@ -373,7 +466,15 @@ class IncomeConversionComponent extends React.PureComponent {
 }
 const withForm = withFormik({
   mapPropsToValues: () => ({
-    income: '',
+    income: 0,
+    netIncome: 0,
+    incomeBeforeTax: 0,
+    taxableIncome: 0,
+    incomeForSI: 0,
+    incomeForHI: 0,
+    incomeForUI: 0,
+    dependantDeduction: 0,
+    totalPIT: 0,
     si: 8,
     hi: 1.5,
     ui: 1,
@@ -382,13 +483,12 @@ const withForm = withFormik({
     personal: '9,000,000',
     dependant: '3,600,000',
     totalDependant: 0,
-    pitLevels: PIT_LEVELS
+    pitLevels: PIT_LEVELS.map(level => ({ ...level }))
   }),
   handleSubmit: (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 1000);
+    // setTimeout(() => {
+    //   setSubmitting(false);
+    // }, 1000);
   }
 });
 

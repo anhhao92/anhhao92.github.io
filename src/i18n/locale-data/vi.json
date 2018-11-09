@@ -23,12 +23,13 @@
   "tools.minimumWage": "Vùng",
   "tools.lang": "Ngôn ngữ",
   "tools.income": "Thu nhập",
+  "tools.incomeBeforeTax": "Thu nhập trước thuế",
   "tools.section.title": "Tính lương GROSS và NET",
   "tools.section.detail": "Chi tiết thu nhập",
-  "tools.section.pit": "Chi tiết thuế thu nhập cá nhân",
   "tools.section.pitLevel": "Bậc thuế",
   "tools.section.setting": "Cài đặt",
   "tools.section.deduction": "Giảm trừ",
   "tools.section.calBy": "Tính theo",
-  "tools.section.currency": "Loại tiền"
+  "tools.section.currency": "Loại tiền",
+  "tools.minimumWageTooltip": "Mức lương tối thiếu cho vùng này là {value} VND"
 }
