@@ -19,3 +19,13 @@
   background-size: contain;
   background-color: #002650;
 }
+
+.menuAction {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  a {
+    text-decoration: none;
+  }
+}

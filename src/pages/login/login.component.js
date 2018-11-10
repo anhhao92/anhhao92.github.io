@@ -1,8 +1,17 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser, saveUserInfo } from '../../actions/auth.action';
 import { Input, Label, Button, Alert } from 'reactstrap';
+
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownToggle,
+  DropdownMenu
+} from 'reactstrap';
+import FaQuestionCircleO from 'react-icons/lib/fa/question-circle';
+
 import { firebase } from '../../configs/firebase';
 import firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
@@ -28,6 +37,12 @@ class Login extends React.PureComponent {
   handleChangePassword = e => {
     this.setState({
       password: e.target.value
+    });
+  };
+
+  toggle = () => {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
     });
   };
 
@@ -71,10 +86,37 @@ class Login extends React.PureComponent {
     authUi.delete();
   }
 
+  renderAction() {
+    return (
+      <Dropdown
+        className={classes.menuAction}
+        direction="left"
+        isOpen={this.state.dropdownOpen}
+        toggle={this.toggle}
+      >
+        <DropdownToggle nav caret>
+          <FaQuestionCircleO />
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem header>Available Features</DropdownItem>
+          <DropdownItem>
+            <Link to="/tools">GROSS &amp; NET Calculation</Link>
+          </DropdownItem>
+          <DropdownItem disabled>Request Feature</DropdownItem>
+          <DropdownItem divider />
+          <DropdownItem>
+            <Link to="/profile">My Profile</Link>
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    );
+  }
+
   render() {
     const { error } = this.props;
     return (
       <div className={classes.formContainer}>
+        {this.renderAction()}
         <form className={classes.formSignIn} onSubmit={this.onSubmit}>
           <h3 className="text-center">Please sign in</h3>
           {error && <Alert color="danger">{error}</Alert>}

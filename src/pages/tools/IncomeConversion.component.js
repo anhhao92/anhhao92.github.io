@@ -3,7 +3,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { withFormik, Field, FieldArray } from 'formik';
-import { changeLanguague } from '../../actions/tools.action';
+import {
+  changeLanguague,
+  featchExchangeRate
+} from '../../actions/tools.action';
 import Tooltip from '@material-ui/core/Tooltip';
 import FaQuestionCircleO from 'react-icons/lib/fa/question-circle';
 import { PIT_LEVELS, MINIMUM_WAGE } from '../../constants';
@@ -496,7 +499,7 @@ const withConnect = connect(
   state => {
     return state.locales;
   },
-  { changeLanguague }
+  { changeLanguague, featchExchangeRate }
 );
 
 export default compose(
