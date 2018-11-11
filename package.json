@@ -42,10 +42,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -b master -d build",
     "precommit": "lint-staged",
-    "start-js": "react-scripts start",
-    "start": "npm-run-all -p start-js",
-    "build-js": "react-scripts build",
-    "build": "npm-run-all build-js",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

@@ -7,7 +7,7 @@ import { dataReport } from './simpleChart.reducer';
 import { stockTicker } from './stockTicker.reducer';
 import { auth } from './authentication.reducer';
 import { locales } from './locales.reducer';
-
+import { exchangeRate } from './exchangeRate.reducer';
 export default combineReducers({
   routing: routerReducer,
   dashboard,
@@ -16,5 +16,6 @@ export default combineReducers({
   dataReport,
   stockTicker,
   auth,
-  locales
+  locales,
+  exchangeRate
 });

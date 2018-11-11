@@ -1,3 +1,5 @@
+import * as actionType from '../constants/ActionTypes';
+
 export const changeLanguague = value => dispatch => {
   dispatch({
     type: 'CHANGE_LANGUAGE',
@@ -5,13 +7,15 @@ export const changeLanguague = value => dispatch => {
   });
 };
 
-export const featchExchangeRate = () => dispatch => {
-  fetch('//www.vietcombank.com.vn/exchangerates/ExrateXML.aspx', {
-    mode: 'no-cors'
-  })
-    .then(res => res.text())
-    .then(xmlString =>
-      new window.DOMParser().parseFromString(xmlString, 'text/xml')
-    )
-    .then(data => console.log(data));
+export const fetchExchangeRate = () => dispatch => {
+  return fetch(
+    'https://us-central1-dashboard-64a35.cloudfunctions.net/getExchanceRate'
+  )
+    .then(res => res.json())
+    .then(payload => {
+      dispatch({
+        type: actionType.GET_EXCHANGE_RATE,
+        payload
+      });
+    });
 };
