@@ -6,7 +6,7 @@ import { withFormik, Field, FieldArray } from 'formik';
 import { changeLanguague, fetchExchangeRate } from '../../actions/tools.action';
 import Tooltip from '@material-ui/core/Tooltip';
 import FaQuestionCircleO from 'react-icons/lib/fa/question-circle';
-import { PIT_LEVELS, MINIMUM_WAGE } from '../../constants';
+import { PIT_LEVELS, MINIMUM_WAGE, USD } from '../../constants';
 
 class IncomeConversionComponent extends React.PureComponent {
   convertToNumber(input) {
@@ -63,16 +63,19 @@ class IncomeConversionComponent extends React.PureComponent {
   convertGrossToNet = () => {
     const { setFieldValue } = this.props;
     const values = this.parseFormValueToNumber();
+    const grossIncome =
+      values.currency === 'usd' ? values.income * USD : values.income;
     const maxSI = values.minimumWage * 20;
     const deduction =
       values.personal + values.dependant * values.totalDependant;
-    const incomeForSI = values.income <= maxSI ? values.income : maxSI;
+    const incomeForSI = grossIncome <= maxSI ? grossIncome : maxSI;
     const incomeAfterSI = Math.floor(
-      values.income - (incomeForSI * (values.si + values.hi + values.ui)) / 100
+      grossIncome - (incomeForSI * (values.si + values.hi + values.ui)) / 100
     );
     const incomeForPIT = incomeAfterSI - deduction;
     const incomePIT = incomeForPIT < 0 ? 0 : incomeForPIT;
     const totalTax = this.calculatePIT(incomePIT);
+    setFieldValue('income', grossIncome);
     setFieldValue('incomeBeforeTax', incomeAfterSI);
     setFieldValue('taxableIncome', incomePIT);
     setFieldValue('incomeForSI', Math.floor(incomeForSI * values.si) / 100);
@@ -255,6 +258,9 @@ class IncomeConversionComponent extends React.PureComponent {
                     id="tools.section.currency"
                     defaultMessage="Default message"
                   />
+                  <Tooltip title={`1 USD = ${USD} VND`}>
+                    <FaQuestionCircleO />
+                  </Tooltip>
                 </label>
                 <Field
                   component="select"
@@ -449,7 +455,7 @@ class IncomeConversionComponent extends React.PureComponent {
                     <FormattedMessage
                       id={item.title}
                       defaultMessage="Default message"
-                    />{' '}
+                    />
                     (%)
                   </h6>
                   <h6 className="col-sm-6 text-right">

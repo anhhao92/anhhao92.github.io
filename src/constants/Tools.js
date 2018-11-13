@@ -1,3 +1,4 @@
+export const USD = 23200;
 export const PIT_LEVELS = [
   {
     title: 'tools.level_1',
